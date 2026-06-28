@@ -1,0 +1,155 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "nexus-blocks/image-box",
+  "version": "1.0.0",
+  "title": "Image Box",
+  "category": "nexus-blocks",
+  "description": "Image with heading and description for team or product cards.",
+  "keywords": [
+    "image box",
+    "card",
+    "nexus"
+  ],
+  "textdomain": "nexus-blocks",
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "customClassName": true
+  },
+  "attributes": {
+    "uniqueId": {
+      "type": "string",
+      "default": ""
+    },
+    "imageId": {
+      "type": "number"
+    },
+    "imageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "imageAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "titleTag": {
+      "type": "string",
+      "default": "h3"
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "linkUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "linkType": {
+      "type": "string",
+      "default": "card"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Learn More"
+    },
+    "position": {
+      "type": "string",
+      "default": "top"
+    },
+    "imageWidth": {
+      "type": "string",
+      "default": ""
+    },
+    "imageMaxWidth": {
+      "type": "string",
+      "default": ""
+    },
+    "imageHeight": {
+      "type": "string",
+      "default": ""
+    },
+    "objectFit": {
+      "type": "string",
+      "default": "cover"
+    },
+    "imageSpacing": {
+      "type": "number",
+      "default": 16
+    },
+    "imageBorder": {
+      "type": "object",
+      "default": {}
+    },
+    "imageBorderRadius": {
+      "type": "string",
+      "default": ""
+    },
+    "imageBoxShadow": {
+      "type": "object",
+      "default": {}
+    },
+    "imgHoverAnimation": {
+      "type": "string",
+      "default": ""
+    },
+    "alignment": {
+      "type": "string",
+      "default": "left"
+    },
+    "hoverEffect": {
+      "type": "string",
+      "default": ""
+    },
+    "transitionDuration": {
+      "type": "number",
+      "default": 300
+    },
+    "titleColor": {
+      "type": "string",
+      "default": ""
+    },
+    "titleTypography": {
+      "type": "object",
+      "default": {}
+    },
+    "titleSpacing": {
+      "type": "number",
+      "default": 8
+    },
+    "descColor": {
+      "type": "string",
+      "default": ""
+    },
+    "descTypography": {
+      "type": "object",
+      "default": {}
+    },
+    "margin": {
+      "type": "object",
+      "default": {}
+    },
+    "padding": {
+      "type": "object",
+      "default": {}
+    },
+    "animation": {
+      "type": "object",
+      "default": {}
+    },
+    "cssId": {
+      "type": "string",
+      "default": ""
+    },
+    "cssClasses": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "icon": "images-alt"
+}

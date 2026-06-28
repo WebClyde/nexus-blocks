@@ -1,0 +1,196 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "nexus-blocks/icon-box",
+  "version": "1.0.0",
+  "title": "Icon Box",
+  "category": "nexus-blocks",
+  "description": "Icon with heading and description for feature cards.",
+  "keywords": [
+    "icon box",
+    "feature",
+    "nexus"
+  ],
+  "textdomain": "nexus-blocks",
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "customClassName": true
+  },
+  "attributes": {
+    "uniqueId": {
+      "type": "string",
+      "default": ""
+    },
+    "iconClass": {
+      "type": "string",
+      "default": "fa-solid fa-star"
+    },
+    "iconView": {
+      "type": "string",
+      "default": "default"
+    },
+    "iconShape": {
+      "type": "string",
+      "default": "circle"
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "titleTag": {
+      "type": "string",
+      "default": "h3"
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "linkUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "linkType": {
+      "type": "string",
+      "default": "card"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Learn More"
+    },
+    "badgeText": {
+      "type": "string",
+      "default": ""
+    },
+    "numberPrefix": {
+      "type": "string",
+      "default": ""
+    },
+    "position": {
+      "type": "string",
+      "default": "top"
+    },
+    "iconPrimaryColor": {
+      "type": "string",
+      "default": ""
+    },
+    "iconSecondaryColor": {
+      "type": "string",
+      "default": ""
+    },
+    "iconSize": {
+      "type": "number",
+      "default": 40
+    },
+    "iconPadding": {
+      "type": "number",
+      "default": 16
+    },
+    "iconSpacing": {
+      "type": "number",
+      "default": 16
+    },
+    "iconBorder": {
+      "type": "object",
+      "default": {}
+    },
+    "iconBorderRadius": {
+      "type": "string",
+      "default": ""
+    },
+    "iconBoxShadow": {
+      "type": "object",
+      "default": {}
+    },
+    "iconRotate": {
+      "type": "number",
+      "default": 0
+    },
+    "iconHoverAnimation": {
+      "type": "string",
+      "default": ""
+    },
+    "cardBackground": {
+      "type": "object",
+      "default": {}
+    },
+    "cardBorder": {
+      "type": "object",
+      "default": {}
+    },
+    "cardBorderRadius": {
+      "type": "string",
+      "default": ""
+    },
+    "cardBoxShadow": {
+      "type": "object",
+      "default": {}
+    },
+    "cardPadding": {
+      "type": "object",
+      "default": {}
+    },
+    "alignment": {
+      "type": "string",
+      "default": "left"
+    },
+    "hoverEffect": {
+      "type": "string",
+      "default": ""
+    },
+    "transitionDuration": {
+      "type": "number",
+      "default": 300
+    },
+    "titleColor": {
+      "type": "string",
+      "default": ""
+    },
+    "titleTypography": {
+      "type": "object",
+      "default": {}
+    },
+    "titleSpacing": {
+      "type": "number",
+      "default": 8
+    },
+    "descColor": {
+      "type": "string",
+      "default": ""
+    },
+    "descTypography": {
+      "type": "object",
+      "default": {}
+    },
+    "numberColor": {
+      "type": "string",
+      "default": ""
+    },
+    "numberTypography": {
+      "type": "object",
+      "default": {}
+    },
+    "margin": {
+      "type": "object",
+      "default": {}
+    },
+    "padding": {
+      "type": "object",
+      "default": {}
+    },
+    "animation": {
+      "type": "object",
+      "default": {}
+    },
+    "cssId": {
+      "type": "string",
+      "default": ""
+    },
+    "cssClasses": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "icon": "welcome-widgets-menus"
+}

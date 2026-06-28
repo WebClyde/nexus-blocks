@@ -1,0 +1,96 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "nexus-blocks/advanced-text",
+	"version": "1.0.0",
+	"title": "Advanced Text",
+	"category": "nexus-blocks",
+	"description": "Styled body copy with multi-column support and drop cap.",
+	"keywords": [
+		"text",
+		"paragraph",
+		"nexus"
+	],
+	"textdomain": "nexus-blocks",
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"customClassName": true
+	},
+	"attributes": {
+		"uniqueId": {
+			"type": "string",
+			"default": ""
+		},
+		"content": {
+			"type": "string",
+			"default": ""
+		},
+		"alignment": {
+			"type": "string",
+			"default": "left"
+		},
+		"textColor": {
+			"type": "string",
+			"default": ""
+		},
+		"typography": {
+			"type": "object",
+			"default": {}
+		},
+		"dropCap": {
+			"type": "boolean",
+			"default": false
+		},
+		"columns": {
+			"type": "number",
+			"default": 1
+		},
+		"columnGap": {
+			"type": "string",
+			"default": "24px"
+		},
+		"columnRule": {
+			"type": "string",
+			"default": "none"
+		},
+		"columnRuleWidth": {
+			"type": "string",
+			"default": "1px"
+		},
+		"columnRuleColor": {
+			"type": "string",
+			"default": ""
+		},
+		"linkColor": {
+			"type": "string",
+			"default": ""
+		},
+		"linkHoverColor": {
+			"type": "string",
+			"default": ""
+		},
+		"margin": {
+			"type": "object",
+			"default": {}
+		},
+		"padding": {
+			"type": "object",
+			"default": {}
+		},
+		"animation": {
+			"type": "object",
+			"default": {}
+		},
+		"cssId": {
+			"type": "string",
+			"default": ""
+		},
+		"cssClasses": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./index.js",
+	"icon": "editor-textcolor"
+}

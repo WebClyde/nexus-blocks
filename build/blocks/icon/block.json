@@ -1,0 +1,124 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "nexus-blocks/icon",
+  "version": "1.0.0",
+  "title": "Icon",
+  "category": "nexus-blocks",
+  "description": "Scalable vector icon with background shape, border, link, and tooltip.",
+  "keywords": [
+    "icon",
+    "svg",
+    "nexus"
+  ],
+  "textdomain": "nexus-blocks",
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "customClassName": true
+  },
+  "attributes": {
+    "uniqueId": {
+      "type": "string",
+      "default": ""
+    },
+    "iconClass": {
+      "type": "string",
+      "default": "fa-solid fa-star"
+    },
+    "iconView": {
+      "type": "string",
+      "default": "default"
+    },
+    "iconShape": {
+      "type": "string",
+      "default": "circle"
+    },
+    "linkUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "linkTarget": {
+      "type": "boolean",
+      "default": false
+    },
+    "alignment": {
+      "type": "string",
+      "default": "center"
+    },
+    "tooltipText": {
+      "type": "string",
+      "default": ""
+    },
+    "tooltipPosition": {
+      "type": "string",
+      "default": "top"
+    },
+    "iconColor": {
+      "type": "string",
+      "default": ""
+    },
+    "iconHoverColor": {
+      "type": "string",
+      "default": ""
+    },
+    "bgColor": {
+      "type": "string",
+      "default": ""
+    },
+    "bgHoverColor": {
+      "type": "string",
+      "default": ""
+    },
+    "iconSize": {
+      "type": "number",
+      "default": 48
+    },
+    "padding": {
+      "type": "object",
+      "default": {}
+    },
+    "rotate": {
+      "type": "number",
+      "default": 0
+    },
+    "border": {
+      "type": "object",
+      "default": {}
+    },
+    "borderRadius": {
+      "type": "string",
+      "default": ""
+    },
+    "boxShadow": {
+      "type": "object",
+      "default": {}
+    },
+    "hoverAnimation": {
+      "type": "string",
+      "default": ""
+    },
+    "transitionDuration": {
+      "type": "number",
+      "default": 300
+    },
+    "margin": {
+      "type": "object",
+      "default": {}
+    },
+    "animation": {
+      "type": "object",
+      "default": {}
+    },
+    "cssId": {
+      "type": "string",
+      "default": ""
+    },
+    "cssClasses": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "icon": "star-filled"
+}

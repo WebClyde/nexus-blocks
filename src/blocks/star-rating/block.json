@@ -1,0 +1,100 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "nexus-blocks/star-rating",
+	"version": "1.0.0",
+	"title": "Star Rating",
+	"category": "nexus-blocks",
+	"description": "Visual star rating using star, heart, or circle icons.",
+	"keywords": [
+		"rating",
+		"stars",
+		"nexus"
+	],
+	"textdomain": "nexus-blocks",
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"customClassName": true
+	},
+	"attributes": {
+		"uniqueId": {
+			"type": "string",
+			"default": ""
+		},
+		"scale": {
+			"type": "number",
+			"default": 5
+		},
+		"rating": {
+			"type": "number",
+			"default": 4
+		},
+		"iconType": {
+			"type": "string",
+			"default": "star"
+		},
+		"title": {
+			"type": "string",
+			"default": ""
+		},
+		"titlePosition": {
+			"type": "string",
+			"default": "below"
+		},
+		"alignment": {
+			"type": "string",
+			"default": "left"
+		},
+		"iconSize": {
+			"type": "number",
+			"default": 24
+		},
+		"iconSpacing": {
+			"type": "number",
+			"default": 4
+		},
+		"filledColor": {
+			"type": "string",
+			"default": ""
+		},
+		"emptyColor": {
+			"type": "string",
+			"default": ""
+		},
+		"titleColor": {
+			"type": "string",
+			"default": ""
+		},
+		"titleTypography": {
+			"type": "object",
+			"default": {}
+		},
+		"titleGap": {
+			"type": "number",
+			"default": 8
+		},
+		"margin": {
+			"type": "object",
+			"default": {}
+		},
+		"padding": {
+			"type": "object",
+			"default": {}
+		},
+		"animation": {
+			"type": "object",
+			"default": {}
+		},
+		"cssId": {
+			"type": "string",
+			"default": ""
+		},
+		"cssClasses": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./index.js",
+	"icon": "star-half"
+}

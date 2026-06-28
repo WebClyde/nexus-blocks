@@ -1,0 +1,127 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "nexus-blocks/icon-list",
+	"version": "1.0.0",
+	"title": "Icon List",
+	"category": "nexus-blocks",
+	"description": "Styled list where each item has an icon, text, and optional link.",
+	"keywords": [
+		"list",
+		"icon list",
+		"nexus"
+	],
+	"textdomain": "nexus-blocks",
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"customClassName": true
+	},
+	"attributes": {
+		"uniqueId": {
+			"type": "string",
+			"default": ""
+		},
+		"items": {
+			"type": "array",
+			"default": [
+				{
+					"iconClass": "fa-solid fa-check",
+					"text": "List item",
+					"link": "",
+					"iconColor": ""
+				}
+			]
+		},
+		"layout": {
+			"type": "string",
+			"default": "vertical"
+		},
+		"alignment": {
+			"type": "string",
+			"default": "left"
+		},
+		"itemSpacing": {
+			"type": "number",
+			"default": 12
+		},
+		"showDivider": {
+			"type": "boolean",
+			"default": false
+		},
+		"dividerStyle": {
+			"type": "string",
+			"default": "solid"
+		},
+		"dividerWeight": {
+			"type": "number",
+			"default": 1
+		},
+		"dividerColor": {
+			"type": "string",
+			"default": ""
+		},
+		"dividerGap": {
+			"type": "number",
+			"default": 0
+		},
+		"defaultIconColor": {
+			"type": "string",
+			"default": ""
+		},
+		"iconSize": {
+			"type": "number",
+			"default": 18
+		},
+		"iconBgColor": {
+			"type": "string",
+			"default": ""
+		},
+		"iconBorderRadius": {
+			"type": "string",
+			"default": ""
+		},
+		"iconPadding": {
+			"type": "number",
+			"default": 0
+		},
+		"iconTextGap": {
+			"type": "number",
+			"default": 10
+		},
+		"textColor": {
+			"type": "string",
+			"default": ""
+		},
+		"textHoverColor": {
+			"type": "string",
+			"default": ""
+		},
+		"typography": {
+			"type": "object",
+			"default": {}
+		},
+		"margin": {
+			"type": "object",
+			"default": {}
+		},
+		"padding": {
+			"type": "object",
+			"default": {}
+		},
+		"animation": {
+			"type": "object",
+			"default": {}
+		},
+		"cssId": {
+			"type": "string",
+			"default": ""
+		},
+		"cssClasses": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./index.js",
+	"icon": "editor-ul"
+}

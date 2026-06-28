@@ -1,0 +1,630 @@
+/**
+ * Nexus Blocks — Frontend Styles
+ * Imported by src/index.js so wp-scripts outputs build/style-index.css
+ */
+
+/* ─── Reset & Base ─────────────────────────────────────────── */
+[data-nexus-id] {
+  box-sizing: border-box;
+}
+[data-nexus-id] *,
+[data-nexus-id] *::before,
+[data-nexus-id] *::after {
+  box-sizing: inherit;
+}
+
+/* ─── Advanced Heading ─────────────────────────────────────── */
+.nx-heading-wrapper .nexus-heading {
+  margin: 0;
+  line-height: 1.2;
+}
+.nx-heading-wrapper a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ─── Advanced Text ────────────────────────────────────────── */
+.nexus-text {
+  margin: 0;
+}
+.nexus-text.has-drop-cap::first-letter {
+  font-size: 3.5em;
+  float: left;
+  line-height: 0.8;
+  margin: 0.05em 0.12em 0 0;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ─── Advanced Image ───────────────────────────────────────── */
+.nx-image-block {
+  overflow: hidden;
+  line-height: 0;
+}
+.nx-image-block img.nexus-image {
+  transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
+}
+.nx-image-block:hover img.nexus-image {
+  transform: scale(1.03);
+}
+.nx-image-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+}
+.nx-image-block:hover .nx-image-overlay {
+  opacity: 1;
+}
+.nx-overlay-slideUp {
+  transform: translateY(20px);
+}
+.nx-image-block:hover .nx-overlay-slideUp {
+  transform: translateY(0);
+}
+.nx-overlay-slideDown {
+  transform: translateY(-20px);
+}
+.nx-image-block:hover .nx-overlay-slideDown {
+  transform: translateY(0);
+}
+.nx-overlay-zoomIn {
+  transform: scale(0.8);
+}
+.nx-image-block:hover .nx-overlay-zoomIn {
+  transform: scale(1);
+}
+.nx-overlay-zoomOut {
+  transform: scale(1.2);
+}
+.nx-image-block:hover .nx-overlay-zoomOut {
+  transform: scale(1);
+}
+.nexus-image-caption {
+  font-size: 0.875rem;
+  color: #6B7280;
+  margin: 8px 0 0;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ─── Advanced Button ──────────────────────────────────────── */
+.nexus-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1.4;
+  position: relative;
+  overflow: hidden;
+}
+.nexus-button:focus-visible {
+  outline: 2px solid var(--nx-color-primary, #7C3AED);
+  outline-offset: 2px;
+}
+/* Hover animations */
+.nx-hover-grow:hover     { transform: scale(1.05); }
+.nx-hover-shrink:hover   { transform: scale(0.95); }
+.nx-hover-pulse:hover    { animation: nx-pulse 1s infinite; }
+.nx-hover-bounce:hover   { animation: nx-bounce 0.5s; }
+.nx-hover-float:hover    { transform: translateY(-4px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+
+/* ─── Icon ─────────────────────────────────────────────────── */
+.nexus-icon {
+  transition: all 0.3s ease;
+}
+.nexus-icon a {
+  color: inherit;
+  text-decoration: none;
+}
+/* Icon hover animations */
+.nx-hover-grow:hover    { transform: scale(1.15); }
+.nx-hover-shrink:hover  { transform: scale(0.85); }
+.nx-hover-pulse:hover   { animation: nx-pulse 0.8s infinite; }
+.nx-hover-bounce:hover  { animation: nx-bounce 0.5s; }
+.nx-hover-rotate:hover  { transform: rotate(360deg); }
+.nx-hover-wobble:hover  { animation: nx-wobble 0.8s; }
+.nx-hover-float:hover   { transform: translateY(-6px); }
+
+/* Tooltip */
+[data-tooltip] {
+  position: relative;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  background: #1F2937;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+[data-tooltip-pos="top"]::after    { bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(4px); }
+[data-tooltip-pos="bottom"]::after { top: calc(100% + 8px);    left: 50%; transform: translateX(-50%) translateY(-4px); }
+[data-tooltip-pos="left"]::after   { right: calc(100% + 8px);  top: 50%;  transform: translateY(-50%) translateX(4px); }
+[data-tooltip-pos="right"]::after  { left: calc(100% + 8px);   top: 50%;  transform: translateY(-50%) translateX(-4px); }
+[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+[data-tooltip-pos="left"]:hover::after,
+[data-tooltip-pos="right"]:hover::after {
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ─── Divider ──────────────────────────────────────────────── */
+.nexus-divider {
+  width: 100%;
+}
+.nx-divider-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* ─── Spacer ───────────────────────────────────────────────── */
+.nexus-spacer {
+  display: block;
+  width: 100%;
+}
+
+/* ─── Icon Box ─────────────────────────────────────────────── */
+.nexus-icon-box {
+  position: relative;
+}
+.nx-icon-box-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.nx-icon-box-title {
+  margin: 0;
+  line-height: 1.3;
+}
+.nx-icon-box-desc {
+  margin: 0;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+.nx-icon-box-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 20px;
+  background: var(--nx-color-primary, #7C3AED);
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.nx-icon-box-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.nx-icon-box-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--nx-color-accent, #F59E0B);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.nx-number-prefix {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  display: block;
+  margin-bottom: 4px;
+}
+/* Icon hover animations in icon-box */
+.nx-icon-hover-spin:hover i   { animation: nx-spin 1s linear infinite; }
+.nx-icon-hover-bounce:hover i { animation: nx-bounce 0.5s; }
+.nx-icon-hover-shake:hover i  { animation: nx-shake 0.4s; }
+.nx-icon-hover-beat:hover i   { animation: nx-beat 0.6s infinite; }
+
+/* Card hover effects */
+.nx-hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.nx-hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+.nx-hover-glow {
+  transition: box-shadow 0.3s ease;
+}
+.nx-hover-glow:hover {
+  box-shadow: 0 0 0 3px var(--nx-color-primary, #7C3AED), 0 8px 24px rgba(124,58,237,0.2);
+}
+.nx-hover-underline-slide .nx-icon-box-title,
+.nx-hover-underline-slide .nx-image-box-title {
+  position: relative;
+  display: inline-block;
+}
+.nx-hover-underline-slide .nx-icon-box-title::after,
+.nx-hover-underline-slide .nx-image-box-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--nx-color-primary, #7C3AED);
+  transition: width 0.3s ease;
+}
+.nx-hover-underline-slide:hover .nx-icon-box-title::after,
+.nx-hover-underline-slide:hover .nx-image-box-title::after {
+  width: 100%;
+}
+
+/* ─── Image Box ────────────────────────────────────────────── */
+.nexus-image-box {
+  position: relative;
+}
+.nx-image-box-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.nx-image-box-title {
+  margin: 0;
+  line-height: 1.3;
+}
+.nx-image-box-desc {
+  margin: 0;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+.nx-image-box-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 20px;
+  background: var(--nx-color-primary, #7C3AED);
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+.nx-image-box-btn:hover {
+  filter: brightness(1.1);
+}
+/* Image hover animations */
+.nx-img-hover-grow:hover img     { transform: scale(1.08); }
+.nx-img-hover-shrink:hover img   { transform: scale(0.95); }
+.nx-img-hover-float:hover img    { transform: translateY(-6px); }
+.nx-img-hover-sink:hover img     { transform: translateY(6px); }
+.nx-image-box-img img {
+  transition: transform 0.4s ease;
+}
+
+/* ─── Icon List ────────────────────────────────────────────── */
+.nexus-icon-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.nx-icon-list-item {
+  display: flex;
+  align-items: center;
+}
+.nx-icon-list-item a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease;
+}
+.nx-icon-list-item a:hover {
+  opacity: 0.8;
+}
+
+/* ─── Counter ──────────────────────────────────────────────── */
+.nexus-counter {
+  position: relative;
+}
+.nx-counter-number {
+  line-height: 1;
+}
+.nx-counter-prefix,
+.nx-counter-suffix {
+  font-size: 0.6em;
+  vertical-align: super;
+}
+.nx-counter-title {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* ─── Progress Bar ─────────────────────────────────────────── */
+.nexus-progress-bars {
+  width: 100%;
+}
+.nx-progress-title {
+  font-weight: 500;
+}
+.nx-progress-pct {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.nx-progress-fill {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* ─── Star Rating ──────────────────────────────────────────── */
+.nexus-star-rating {
+  line-height: 1;
+}
+.nx-star-icons {
+  display: inline-flex;
+  gap: 2px;
+}
+.nx-rating-title {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+/* ─── Tabs ─────────────────────────────────────────────────── */
+.nexus-tabs {
+  width: 100%;
+  display: flex;
+}
+.nx-tabs-top { flex-direction: column; }
+.nx-tabs-bottom { flex-direction: column-reverse; }
+.nx-tabs-left { flex-direction: row; }
+.nx-tabs-right { flex-direction: row-reverse; }
+
+.nx-tab-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+.nx-tabs-top .nx-tab-labels { border-bottom: 2px solid var(--nx-color-border, #E5E7EB); }
+.nx-tabs-bottom .nx-tab-labels { border-top: 2px solid var(--nx-color-border, #E5E7EB); }
+.nx-tabs-left .nx-tab-labels, .nx-tabs-right .nx-tab-labels {
+  flex-direction: column;
+  min-width: 140px;
+}
+.nx-tabs-left .nx-tab-labels { border-right: 2px solid var(--nx-color-border, #E5E7EB); }
+.nx-tabs-right .nx-tab-labels { border-left: 2px solid var(--nx-color-border, #E5E7EB); }
+
+.nx-tab-panels {
+  flex: 1;
+}
+
+.nx-tab-label {
+  background: transparent;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--nx-color-text, #6B7280);
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  text-align: left;
+}
+.nx-tabs-left .nx-tab-label, .nx-tabs-right .nx-tab-label {
+  margin-bottom: 0;
+}
+.nx-tab-label:hover {
+  color: var(--nx-color-primary, #7C3AED);
+}
+.nx-tab-label.is-active {
+  color: var(--nx-color-primary, #7C3AED);
+  border-bottom-color: var(--nx-color-primary, #7C3AED);
+}
+.nx-tab-panel {
+  padding: 20px;
+  line-height: 1.6;
+}
+.nx-tab-panel:not(.is-active) {
+  display: none;
+}
+
+/* ─── Accordion ────────────────────────────────────────────── */
+.nexus-accordion {
+  width: 100%;
+  border: 1px solid var(--nx-color-border, #E5E7EB);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.nx-accordion-item {
+  border-bottom: 1px solid var(--nx-color-border, #E5E7EB);
+}
+.nx-accordion-item:last-child {
+  border-bottom: none;
+}
+.nx-accordion-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  transition: background 0.2s ease;
+  color: var(--nx-color-heading, #111827);
+}
+.nx-accordion-header:hover {
+  background: var(--nx-color-surface, #F9FAFB);
+}
+.nx-accordion-header i {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+.nx-accordion-item.is-open .nx-accordion-header i:last-child {
+  transform: rotate(180deg);
+}
+.nx-accordion-content {
+  padding: 0 20px 16px;
+  line-height: 1.6;
+  color: var(--nx-color-text, #4B5563);
+}
+.nx-accordion-content p {
+  margin: 0;
+}
+
+/* ─── Alert / Notice ───────────────────────────────────────── */
+.nexus-alert {
+  position: relative;
+}
+.nx-alert-inner {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.nx-alert-body {
+  flex: 1;
+}
+.nx-alert-title {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.nx-alert-desc {
+  margin: 0;
+  line-height: 1.6;
+}
+.nx-alert-dismiss {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  padding: 0;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+.nx-alert-dismiss:hover {
+  opacity: 1;
+}
+
+/* ─── Lightbox link reset ──────────────────────────────────── */
+.nx-lightbox {
+  display: block;
+  line-height: 0;
+}
+
+/* ─── Button Hover Colors (applied via JS) ─────────────────── */
+.nexus-button.nx-hover-active {
+  /* JS toggles this class and sets inline vars */
+}
+
+/* ─── Keyframe Animations ──────────────────────────────────── */
+@keyframes nx-pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+@keyframes nx-bounce {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-10px); }
+  50%  { transform: translateY(0); }
+  70%  { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+@keyframes nx-wobble {
+  0%   { transform: rotate(0); }
+  15%  { transform: rotate(-12deg); }
+  30%  { transform: rotate(10deg); }
+  45%  { transform: rotate(-8deg); }
+  60%  { transform: rotate(5deg); }
+  75%  { transform: rotate(-2deg); }
+  100% { transform: rotate(0); }
+}
+@keyframes nx-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes nx-shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-6px); }
+  40%      { transform: translateX(6px); }
+  60%      { transform: translateX(-4px); }
+  80%      { transform: translateX(4px); }
+}
+@keyframes nx-beat {
+  0%   { transform: scale(1); }
+  15%  { transform: scale(1.25); }
+  30%  { transform: scale(1); }
+  45%  { transform: scale(1.15); }
+  60%  { transform: scale(1); }
+}
+
+/* ─── Entrance Animation Keyframes ─────────────────────────── */
+/* Elements are initially hidden, then animated when scrolled into view */
+[data-nx-animation] {
+  opacity: 0;
+}
+[data-nx-animation].nx-animated {
+  animation-fill-mode: both;
+}
+.nx-anim-done:not([data-nx-animation]) {
+  opacity: 1;
+}
+.nx-anim-done {
+  opacity: 1;
+}
+
+@keyframes nxFadeIn        { from { opacity: 0; } to { opacity: 1; } }
+@keyframes nxFadeInUp      { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes nxFadeInDown    { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes nxFadeInLeft    { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes nxFadeInRight   { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes nxZoomIn        { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
+@keyframes nxZoomInUp      { from { opacity: 0; transform: scale(0.6) translateY(30px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes nxSlideInUp     { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes nxSlideInDown   { from { opacity: 0; transform: translateY(-60px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes nxSlideInLeft   { from { opacity: 0; transform: translateX(-60px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes nxSlideInRight  { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes nxBounceIn      { 0% { opacity: 0; transform: scale(0.3); } 50% { opacity: 1; transform: scale(1.05); } 70% { transform: scale(0.9); } 100% { transform: scale(1); } }
+@keyframes nxFlipInX       { from { opacity: 0; transform: perspective(400px) rotateX(90deg); } to { opacity: 1; transform: perspective(400px) rotateX(0); } }
+@keyframes nxFlipInY       { from { opacity: 0; transform: perspective(400px) rotateY(90deg); } to { opacity: 1; transform: perspective(400px) rotateY(0); } }
+@keyframes nxRollIn        { from { opacity: 0; transform: translateX(-100%) rotate(-120deg); } to { opacity: 1; transform: translateX(0) rotate(0); } }
+@keyframes nxRotateIn      { from { opacity: 0; transform: rotate(-200deg); } to { opacity: 1; transform: rotate(0); } }
+
+/* Animation class map */
+.nx-anim-fadeIn        { animation-name: nxFadeIn; }
+.nx-anim-fadeInUp      { animation-name: nxFadeInUp; }
+.nx-anim-fadeInDown    { animation-name: nxFadeInDown; }
+.nx-anim-fadeInLeft    { animation-name: nxFadeInLeft; }
+.nx-anim-fadeInRight   { animation-name: nxFadeInRight; }
+.nx-anim-zoomIn        { animation-name: nxZoomIn; }
+.nx-anim-zoomInUp      { animation-name: nxZoomInUp; }
+.nx-anim-slideInUp     { animation-name: nxSlideInUp; }
+.nx-anim-slideInDown   { animation-name: nxSlideInDown; }
+.nx-anim-slideInLeft   { animation-name: nxSlideInLeft; }
+.nx-anim-slideInRight  { animation-name: nxSlideInRight; }
+.nx-anim-bounceIn      { animation-name: nxBounceIn; }
+.nx-anim-flipInX       { animation-name: nxFlipInX; }
+.nx-anim-flipInY       { animation-name: nxFlipInY; }
+.nx-anim-rollIn        { animation-name: nxRollIn; }
+.nx-anim-rotateIn      { animation-name: nxRotateIn; }

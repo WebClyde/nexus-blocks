@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "nexus-blocks/tab-item",
+	"version": "1.0.0",
+	"title": "Tab Item",
+	"category": "nexus-blocks",
+	"parent": ["nexus-blocks/tabs"],
+	"description": "A single tab panel.",
+	"textdomain": "nexus-blocks",
+	"supports": { "html": false, "customClassName": true, "reusable": false },
+	"usesContext": ["nexusBlocks/activeTabId"],
+	"attributes": {
+		"tabId":      { "type": "string", "default": "" },
+		"label":      { "type": "string", "default": "New Tab" },
+		"iconClass":  { "type": "string", "default": "" }
+	},
+	"editorScript": "file:./index.js"
+}

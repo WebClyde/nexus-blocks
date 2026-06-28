@@ -1,0 +1,146 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "nexus-blocks/progress-bar",
+	"version": "1.0.0",
+	"title": "Progress Bar",
+	"category": "nexus-blocks",
+	"description": "Animated horizontal fill bar representing a percentage.",
+	"keywords": [
+		"progress",
+		"bar",
+		"nexus"
+	],
+	"textdomain": "nexus-blocks",
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"customClassName": true
+	},
+	"attributes": {
+		"uniqueId": {
+			"type": "string",
+			"default": ""
+		},
+		"items": {
+			"type": "array",
+			"default": [
+				{
+					"title": "Skill",
+					"percentage": 75,
+					"color": ""
+				}
+			]
+		},
+		"displayPercentage": {
+			"type": "boolean",
+			"default": true
+		},
+		"percentagePosition": {
+			"type": "string",
+			"default": "right"
+		},
+		"animateOnScroll": {
+			"type": "boolean",
+			"default": true
+		},
+		"animationDuration": {
+			"type": "number",
+			"default": 1200
+		},
+		"barHeight": {
+			"type": "number",
+			"default": 12
+		},
+		"barBgColor": {
+			"type": "string",
+			"default": ""
+		},
+		"fillColor": {
+			"type": "string",
+			"default": ""
+		},
+		"fillGradient": {
+			"type": "string",
+			"default": ""
+		},
+		"enableGradient": {
+			"type": "boolean",
+			"default": false
+		},
+		"barBorderRadius": {
+			"type": "string",
+			"default": "999px"
+		},
+		"titleColor": {
+			"type": "string",
+			"default": ""
+		},
+		"titleTypography": {
+			"type": "object",
+			"default": {}
+		},
+		"titleSpacing": {
+			"type": "number",
+			"default": 6
+		},
+		"percentageColor": {
+			"type": "string",
+			"default": ""
+		},
+		"percentageTypography": {
+			"type": "object",
+			"default": {}
+		},
+		"itemGap": {
+			"type": "number",
+			"default": 20
+		},
+		"margin": {
+			"type": "object",
+			"default": {}
+		},
+		"padding": {
+			"type": "object",
+			"default": {}
+		},
+		"flexLayout": {
+			"type": "object",
+			"default": {}
+		},
+		"layoutType": {
+			"type": "string",
+			"default": "linear"
+		},
+		"continuousAnimation": {
+			"type": "boolean",
+			"default": false
+		},
+		"counterAnimation": {
+			"type": "boolean",
+			"default": true
+		},
+		"circleSize": {
+			"type": "number",
+			"default": 120
+		},
+		"circleStrokeWidth": {
+			"type": "number",
+			"default": 8
+		},
+		"animation": {
+			"type": "object",
+			"default": {}
+		},
+		"cssId": {
+			"type": "string",
+			"default": ""
+		},
+		"cssClasses": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./index.js",
+	"icon": "chart-bar"
+}

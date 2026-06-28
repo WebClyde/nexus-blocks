@@ -1,0 +1,100 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "nexus-blocks/divider",
+	"version": "1.0.0",
+	"title": "Divider",
+	"category": "nexus-blocks",
+	"description": "Horizontal rule with optional centered label or icon.",
+	"keywords": [
+		"divider",
+		"separator",
+		"nexus"
+	],
+	"textdomain": "nexus-blocks",
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"customClassName": true
+	},
+	"attributes": {
+		"uniqueId": {
+			"type": "string",
+			"default": ""
+		},
+		"dividerStyle": {
+			"type": "string",
+			"default": "solid"
+		},
+		"dividerWidth": {
+			"type": "string",
+			"default": "100%"
+		},
+		"alignment": {
+			"type": "string",
+			"default": "center"
+		},
+		"element": {
+			"type": "string",
+			"default": "none"
+		},
+		"elementText": {
+			"type": "string",
+			"default": ""
+		},
+		"elementIcon": {
+			"type": "string",
+			"default": ""
+		},
+		"dividerColor": {
+			"type": "string",
+			"default": ""
+		},
+		"dividerWeight": {
+			"type": "number",
+			"default": 1
+		},
+		"gapAbove": {
+			"type": "number",
+			"default": 16
+		},
+		"gapBelow": {
+			"type": "number",
+			"default": 16
+		},
+		"textColor": {
+			"type": "string",
+			"default": ""
+		},
+		"iconColor": {
+			"type": "string",
+			"default": ""
+		},
+		"iconSize": {
+			"type": "number",
+			"default": 20
+		},
+		"margin": {
+			"type": "object",
+			"default": {}
+		},
+		"padding": {
+			"type": "object",
+			"default": {}
+		},
+		"animation": {
+			"type": "object",
+			"default": {}
+		},
+		"cssId": {
+			"type": "string",
+			"default": ""
+		},
+		"cssClasses": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./index.js",
+	"icon": "minus"
+}

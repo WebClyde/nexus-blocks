@@ -1,0 +1,111 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "nexus-blocks/tabs",
+	"version": "1.0.0",
+	"title": "Tabs",
+	"category": "nexus-blocks",
+	"description": "Tabbed content panels with horizontal/vertical layout and URL hash support.",
+	"keywords": [
+		"tabs",
+		"panels",
+		"nexus"
+	],
+	"textdomain": "nexus-blocks",
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"customClassName": true
+	},
+	"attributes": {
+		"uniqueId": {
+			"type": "string",
+			"default": ""
+		},
+		"activeTabId": {
+			"type": "string",
+			"default": ""
+		},
+		"defaultOpen": {
+			"type": "number",
+			"default": 0
+		},
+		"tabLayout": {
+			"type": "string",
+			"default": "top"
+		},
+		"tabActivation": {
+			"type": "string",
+			"default": "click"
+		},
+		"labelBgActive": {
+			"type": "string",
+			"default": ""
+		},
+		"labelTextActive": {
+			"type": "string",
+			"default": ""
+		},
+		"labelTypography": {
+			"type": "object",
+			"default": {}
+		},
+		"activeIndicator": {
+			"type": "string",
+			"default": "bottom"
+		},
+		"indicatorColor": {
+			"type": "string",
+			"default": ""
+		},
+		"tabBorder": {
+			"type": "object",
+			"default": {}
+		},
+		"tabPadding": {
+			"type": "object",
+			"default": {}
+		},
+		"tabSpacing": {
+			"type": "number",
+			"default": 4
+		},
+		"contentBackground": {
+			"type": "string",
+			"default": ""
+		},
+		"contentBorder": {
+			"type": "object",
+			"default": {}
+		},
+		"contentPadding": {
+			"type": "object",
+			"default": {}
+		},
+		"margin": {
+			"type": "object",
+			"default": {}
+		},
+		"padding": {
+			"type": "object",
+			"default": {}
+		},
+		"animation": {
+			"type": "object",
+			"default": {}
+		},
+		"cssId": {
+			"type": "string",
+			"default": ""
+		},
+		"cssClasses": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"providesContext": {
+		"nexusBlocks/activeTabId": "activeTabId"
+	},
+	"editorScript": "file:./index.js",
+	"icon": "index-card"
+}

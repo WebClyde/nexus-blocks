@@ -1,0 +1,156 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "nexus-blocks/counter",
+	"version": "1.0.0",
+	"title": "Counter",
+	"category": "nexus-blocks",
+	"description": "Animated number counter that counts up on scroll into view.",
+	"keywords": [
+		"counter",
+		"number",
+		"nexus"
+	],
+	"textdomain": "nexus-blocks",
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"customClassName": true
+	},
+	"attributes": {
+		"uniqueId": {
+			"type": "string",
+			"default": ""
+		},
+		"startNumber": {
+			"type": "number",
+			"default": 0
+		},
+		"endNumber": {
+			"type": "number",
+			"default": 1000
+		},
+		"prefix": {
+			"type": "string",
+			"default": ""
+		},
+		"suffix": {
+			"type": "string",
+			"default": ""
+		},
+		"duration": {
+			"type": "number",
+			"default": 2000
+		},
+		"separator": {
+			"type": "string",
+			"default": ""
+		},
+		"decimalPlaces": {
+			"type": "number",
+			"default": 0
+		},
+		"animationType": {
+			"type": "string",
+			"default": "countup"
+		},
+		"title": {
+			"type": "string",
+			"default": ""
+		},
+		"titlePosition": {
+			"type": "string",
+			"default": "below"
+		},
+		"iconClass": {
+			"type": "string",
+			"default": ""
+		},
+		"numberColor": {
+			"type": "string",
+			"default": ""
+		},
+		"numberTypography": {
+			"type": "object",
+			"default": {}
+		},
+		"prefixSuffixColor": {
+			"type": "string",
+			"default": ""
+		},
+		"prefixSuffixTypography": {
+			"type": "object",
+			"default": {}
+		},
+		"titleColor": {
+			"type": "string",
+			"default": ""
+		},
+		"titleTypography": {
+			"type": "object",
+			"default": {}
+		},
+		"titleSpacing": {
+			"type": "number",
+			"default": 8
+		},
+		"iconColor": {
+			"type": "string",
+			"default": ""
+		},
+		"iconSize": {
+			"type": "number",
+			"default": 40
+		},
+		"iconSpacing": {
+			"type": "number",
+			"default": 12
+		},
+		"background": {
+			"type": "object",
+			"default": {}
+		},
+		"border": {
+			"type": "object",
+			"default": {}
+		},
+		"borderRadius": {
+			"type": "string",
+			"default": ""
+		},
+		"boxShadow": {
+			"type": "object",
+			"default": {}
+		},
+		"cardPadding": {
+			"type": "object",
+			"default": {}
+		},
+		"alignment": {
+			"type": "string",
+			"default": "center"
+		},
+		"margin": {
+			"type": "object",
+			"default": {}
+		},
+		"padding": {
+			"type": "object",
+			"default": {}
+		},
+		"animation": {
+			"type": "object",
+			"default": {}
+		},
+		"cssId": {
+			"type": "string",
+			"default": ""
+		},
+		"cssClasses": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./index.js",
+	"icon": "performance"
+}

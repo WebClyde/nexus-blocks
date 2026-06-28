@@ -1,0 +1,136 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "nexus-blocks/advanced-button",
+  "version": "1.0.0",
+  "title": "Advanced Button",
+  "category": "nexus-blocks",
+  "description": "CTA button with gradient, hover effects, icon, and animated border.",
+  "keywords": [
+    "button",
+    "cta",
+    "nexus"
+  ],
+  "textdomain": "nexus-blocks",
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "customClassName": true
+  },
+  "attributes": {
+    "uniqueId": {
+      "type": "string",
+      "default": ""
+    },
+    "text": {
+      "type": "string",
+      "default": "Click Here"
+    },
+    "linkUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "linkTarget": {
+      "type": "boolean",
+      "default": false
+    },
+    "linkNofollow": {
+      "type": "boolean",
+      "default": false
+    },
+    "buttonSize": {
+      "type": "string",
+      "default": "md"
+    },
+    "alignment": {
+      "type": "string",
+      "default": "left"
+    },
+    "textColor": {
+      "type": "string",
+      "default": ""
+    },
+    "bgColor": {
+      "type": "string",
+      "default": ""
+    },
+    "bgGradient": {
+      "type": "string",
+      "default": ""
+    },
+    "enableGradient": {
+      "type": "boolean",
+      "default": false
+    },
+    "typography": {
+      "type": "object",
+      "default": {}
+    },
+    "border": {
+      "type": "object",
+      "default": {}
+    },
+    "borderRadius": {
+      "type": "string",
+      "default": "6px"
+    },
+    "boxShadow": {
+      "type": "object",
+      "default": {}
+    },
+    "hoverTextColor": {
+      "type": "string",
+      "default": ""
+    },
+    "hoverBgColor": {
+      "type": "string",
+      "default": ""
+    },
+    "hoverAnimation": {
+      "type": "string",
+      "default": ""
+    },
+    "transitionDuration": {
+      "type": "number",
+      "default": 300
+    },
+    "iconClass": {
+      "type": "string",
+      "default": ""
+    },
+    "iconPosition": {
+      "type": "string",
+      "default": "before"
+    },
+    "iconSize": {
+      "type": "number",
+      "default": 16
+    },
+    "iconGap": {
+      "type": "number",
+      "default": 8
+    },
+    "margin": {
+      "type": "object",
+      "default": {}
+    },
+    "padding": {
+      "type": "object",
+      "default": {}
+    },
+    "animation": {
+      "type": "object",
+      "default": {}
+    },
+    "cssId": {
+      "type": "string",
+      "default": ""
+    },
+    "cssClasses": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "icon": "button"
+}

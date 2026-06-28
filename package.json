@@ -1,0 +1,32 @@
+{
+  "name": "nexus-blocks",
+  "version": "1.0.15",
+  "description": "Advanced Gutenberg block plugin with Elementor Pro-level controls",
+  "author": "WebClyde",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start",
+    "lint:js": "wp-scripts lint-js",
+    "lint:css": "wp-scripts lint-style",
+    "test:unit": "wp-scripts test-unit-js",
+    "packages-update": "wp-scripts packages-update"
+  },
+  "dependencies": {
+    "@wordpress/blocks": "^13",
+    "@wordpress/block-editor": "^13",
+    "@wordpress/components": "^28",
+    "@wordpress/compose": "^7",
+    "@wordpress/data": "^10",
+    "@wordpress/element": "^6",
+    "@wordpress/hooks": "^4",
+    "@wordpress/i18n": "^5",
+    "@wordpress/icons": "^10"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^27"
+  },
+  "wp-scripts": {
+    "webpack-config": "./webpack.config.js"
+  }
+}

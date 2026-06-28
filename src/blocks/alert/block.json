@@ -1,0 +1,136 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "nexus-blocks/alert",
+	"version": "1.0.0",
+	"title": "Alert / Notice",
+	"category": "nexus-blocks",
+	"description": "Dismissible alert/notice with info, success, warning, danger, or custom type.",
+	"keywords": [
+		"alert",
+		"notice",
+		"nexus"
+	],
+	"textdomain": "nexus-blocks",
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"customClassName": true
+	},
+	"attributes": {
+		"uniqueId": {
+			"type": "string",
+			"default": ""
+		},
+		"alertType": {
+			"type": "string",
+			"default": "info"
+		},
+		"title": {
+			"type": "string",
+			"default": ""
+		},
+		"description": {
+			"type": "string",
+			"default": ""
+		},
+		"iconClass": {
+			"type": "string",
+			"default": ""
+		},
+		"showIcon": {
+			"type": "boolean",
+			"default": true
+		},
+		"dismissible": {
+			"type": "boolean",
+			"default": false
+		},
+		"dismissCookie": {
+			"type": "boolean",
+			"default": false
+		},
+		"cookieDuration": {
+			"type": "number",
+			"default": 30
+		},
+		"bgColor": {
+			"type": "string",
+			"default": ""
+		},
+		"textColor": {
+			"type": "string",
+			"default": ""
+		},
+		"iconColor": {
+			"type": "string",
+			"default": ""
+		},
+		"iconSize": {
+			"type": "number",
+			"default": 20
+		},
+		"border": {
+			"type": "object",
+			"default": {}
+		},
+		"borderLeftAccent": {
+			"type": "boolean",
+			"default": false
+		},
+		"borderLeftAccentColor": {
+			"type": "string",
+			"default": ""
+		},
+		"borderLeftAccentWidth": {
+			"type": "number",
+			"default": 4
+		},
+		"borderRadius": {
+			"type": "string",
+			"default": "6px"
+		},
+		"boxShadow": {
+			"type": "object",
+			"default": {}
+		},
+		"padding": {
+			"type": "object",
+			"default": {}
+		},
+		"titleTypography": {
+			"type": "object",
+			"default": {}
+		},
+		"descTypography": {
+			"type": "object",
+			"default": {}
+		},
+		"titleColorOverride": {
+			"type": "string",
+			"default": ""
+		},
+		"dismissBtnColor": {
+			"type": "string",
+			"default": ""
+		},
+		"margin": {
+			"type": "object",
+			"default": {}
+		},
+		"animation": {
+			"type": "object",
+			"default": {}
+		},
+		"cssId": {
+			"type": "string",
+			"default": ""
+		},
+		"cssClasses": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./index.js",
+	"icon": "warning"
+}

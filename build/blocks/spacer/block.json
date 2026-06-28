@@ -1,0 +1,56 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "nexus-blocks/spacer",
+  "version": "1.0.0",
+  "title": "Spacer",
+  "category": "nexus-blocks",
+  "description": "Responsive vertical space block.",
+  "keywords": [
+    "spacer",
+    "space",
+    "nexus"
+  ],
+  "textdomain": "nexus-blocks",
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "customClassName": true
+  },
+  "attributes": {
+    "uniqueId": {
+      "type": "string",
+      "default": ""
+    },
+    "height": {
+      "type": "string",
+      "default": "60px"
+    },
+    "bgColor": {
+      "type": "string",
+      "default": ""
+    },
+    "cssId": {
+      "type": "string",
+      "default": ""
+    },
+    "cssClasses": {
+      "type": "string",
+      "default": ""
+    },
+    "margin": {
+      "type": "object",
+      "default": {}
+    },
+    "padding": {
+      "type": "object",
+      "default": {}
+    },
+    "animation": {
+      "type": "object",
+      "default": {}
+    }
+  },
+  "editorScript": "file:./index.js",
+  "icon": "resize-vertical"
+}

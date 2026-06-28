@@ -1,0 +1,173 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "nexus-blocks/accordion",
+  "version": "1.0.0",
+  "title": "Accordion",
+  "category": "nexus-blocks",
+  "description": "Expand/collapse panels with FAQ schema support.",
+  "keywords": [
+    "accordion",
+    "faq",
+    "nexus"
+  ],
+  "textdomain": "nexus-blocks",
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "customClassName": true
+  },
+  "attributes": {
+    "uniqueId": {
+      "type": "string",
+      "default": ""
+    },
+    "items": {
+      "type": "array",
+      "default": [
+        {
+          "title": "What is Nexus Blocks?",
+          "content": "Nexus Blocks is an advanced Gutenberg block plugin."
+        },
+        {
+          "title": "How do I install it?",
+          "content": "Upload the plugin and activate it from your WordPress admin."
+        },
+        {
+          "title": "Is it free?",
+          "content": "Phase 1 blocks are free. Pro blocks are available in Nexus Blocks Pro."
+        }
+      ]
+    },
+    "defaultOpen": {
+      "type": "number",
+      "default": -1
+    },
+    "openIconClass": {
+      "type": "string",
+      "default": "fa-solid fa-chevron-down"
+    },
+    "closeIconClass": {
+      "type": "string",
+      "default": "fa-solid fa-chevron-up"
+    },
+    "iconPosition": {
+      "type": "string",
+      "default": "right"
+    },
+    "faqSchema": {
+      "type": "boolean",
+      "default": false
+    },
+    "headerBgActive": {
+      "type": "string",
+      "default": ""
+    },
+    "titleColor": {
+      "type": "string",
+      "default": ""
+    },
+    "titleColorActive": {
+      "type": "string",
+      "default": ""
+    },
+    "titleTypography": {
+      "type": "object",
+      "default": {}
+    },
+    "contentTypography": {
+      "type": "object",
+      "default": {}
+    },
+    "headerBorder": {
+      "type": "object",
+      "default": {}
+    },
+    "headerBorderBetween": {
+      "type": "boolean",
+      "default": true
+    },
+    "headerPadding": {
+      "type": "object",
+      "default": {}
+    },
+    "iconColor": {
+      "type": "string",
+      "default": ""
+    },
+    "iconColorActive": {
+      "type": "string",
+      "default": ""
+    },
+    "iconSize": {
+      "type": "number",
+      "default": 16
+    },
+    "iconBgActive": {
+      "type": "string",
+      "default": ""
+    },
+    "iconBorderRadius": {
+      "type": "string",
+      "default": ""
+    },
+    "contentBackground": {
+      "type": "string",
+      "default": ""
+    },
+    "contentPadding": {
+      "type": "object",
+      "default": {}
+    },
+    "contentBorder": {
+      "type": "object",
+      "default": {}
+    },
+    "margin": {
+      "type": "object",
+      "default": {}
+    },
+    "padding": {
+      "type": "object",
+      "default": {}
+    },
+    "itemGap": {
+      "type": "number",
+      "default": 0
+    },
+    "titleContentGap": {
+      "type": "number",
+      "default": 0
+    },
+    "animation": {
+      "type": "object",
+      "default": {}
+    },
+    "width": {
+      "type": "string",
+      "default": ""
+    },
+    "maxWidth": {
+      "type": "string",
+      "default": ""
+    },
+    "minHeight": {
+      "type": "string",
+      "default": ""
+    },
+    "overflow": {
+      "type": "string",
+      "default": ""
+    },
+    "cssId": {
+      "type": "string",
+      "default": ""
+    },
+    "cssClasses": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "icon": "list-view"
+}

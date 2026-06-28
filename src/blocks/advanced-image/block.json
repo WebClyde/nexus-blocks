@@ -1,0 +1,143 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "nexus-blocks/advanced-image",
+	"version": "1.0.0",
+	"title": "Advanced Image",
+	"category": "nexus-blocks",
+	"description": "Image with CSS filters, lightbox, hover overlay, and shape masks.",
+	"keywords": [
+		"image",
+		"photo",
+		"nexus"
+	],
+	"textdomain": "nexus-blocks",
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"customClassName": true
+	},
+	"attributes": {
+		"uniqueId": {
+			"type": "string",
+			"default": ""
+		},
+		"imageId": {
+			"type": "number"
+		},
+		"imageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"imageAlt": {
+			"type": "string",
+			"default": ""
+		},
+		"imageSize": {
+			"type": "string",
+			"default": "full"
+		},
+		"alignment": {
+			"type": "string",
+			"default": "center"
+		},
+		"caption": {
+			"type": "string",
+			"default": ""
+		},
+		"captionType": {
+			"type": "string",
+			"default": ""
+		},
+		"captionText": {
+			"type": "string",
+			"default": ""
+		},
+		"linkType": {
+			"type": "string",
+			"default": ""
+		},
+		"linkUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"linkTarget": {
+			"type": "boolean",
+			"default": false
+		},
+		"openLightbox": {
+			"type": "boolean",
+			"default": false
+		},
+		"maxWidth": {
+			"type": "string",
+			"default": ""
+		},
+		"objectFit": {
+			"type": "string",
+			"default": "cover"
+		},
+		"opacity": {
+			"type": "number",
+			"default": 1
+		},
+		"shapeMask": {
+			"type": "string",
+			"default": ""
+		},
+		"border": {
+			"type": "object",
+			"default": {}
+		},
+		"borderRadius": {
+			"type": "string",
+			"default": ""
+		},
+		"boxShadow": {
+			"type": "object",
+			"default": {}
+		},
+		"enableOverlay": {
+			"type": "boolean",
+			"default": false
+		},
+		"overlayColor": {
+			"type": "string",
+			"default": ""
+		},
+		"overlayText": {
+			"type": "string",
+			"default": ""
+		},
+		"overlayTextColor": {
+			"type": "string",
+			"default": ""
+		},
+		"overlayAnimation": {
+			"type": "string",
+			"default": "fadeIn"
+		},
+		"margin": {
+			"type": "object",
+			"default": {}
+		},
+		"padding": {
+			"type": "object",
+			"default": {}
+		},
+		"animation": {
+			"type": "object",
+			"default": {}
+		},
+		"cssId": {
+			"type": "string",
+			"default": ""
+		},
+		"cssClasses": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./index.js",
+	"icon": "format-image"
+}
