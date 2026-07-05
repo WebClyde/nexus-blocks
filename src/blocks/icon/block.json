@@ -62,13 +62,9 @@
 			"type": "string",
 			"default": ""
 		},
-		"bgColor": {
-			"type": "string",
-			"default": ""
-		},
-		"bgHoverColor": {
-			"type": "string",
-			"default": ""
+		"background": {
+			"type": "object",
+			"default": {}
 		},
 		"iconSize": {
 			"type": "number",

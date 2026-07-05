@@ -1,4 +1,5 @@
 import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { backgroundToStyle, backgroundHoverToCSS } from '../../controls';
 const TYPE_DEFAULTS = {
 	info:    { bg: '#EFF6FF', text: '#1D4ED8', icon: 'fa-solid fa-info-circle', border: '#BFDBFE' },
 	success: { bg: '#F0FDF4', text: '#15803D', icon: 'fa-solid fa-check', border: '#BBF7D0' },
@@ -7,7 +8,7 @@ const TYPE_DEFAULTS = {
 	custom:  { bg: '#F9FAFB', text: '#111827', icon: 'fa-solid fa-info-circle', border: '#E5E7EB' },
 };
 export default function Save( { attributes } ) {
-	const { uniqueId, alertType, title, description, iconClass, showIcon, dismissible, dismissCookie, cookieDuration, bgColor, textColor, iconColor, iconSize, border, borderLeftAccent, borderLeftAccentColor, borderLeftAccentWidth, borderRadius, titleColorOverride, dismissBtnColor, padding, cssId, cssClasses, animation } = attributes;
+	const { uniqueId, alertType, title, description, iconClass, showIcon, dismissible, dismissCookie, cookieDuration, background, textColor, iconColor, iconSize, border, borderLeftAccent, borderLeftAccentColor, borderLeftAccentWidth, borderRadius, titleColorOverride, dismissBtnColor, padding, cssId, cssClasses, animation } = attributes;
 	const type     = alertType ?? 'info';
 	const defaults = TYPE_DEFAULTS[ type ] ?? TYPE_DEFAULTS.custom;
 	const blockProps = useBlockProps.save( {
@@ -16,18 +17,20 @@ export default function Save( { attributes } ) {
 		...( animation?.animation ? { 'data-nx-animation': animation.animation, 'data-nx-duration': animation.duration ?? 600, 'data-nx-delay': animation.delay ?? 0 } : {} ),
 	} );
 	const alertStyle = {
-		background: bgColor || defaults.bg, color: textColor || defaults.text, borderRadius: borderRadius ?? '6px',
+		background: defaults.bg, ...backgroundToStyle( background ), color: textColor || defaults.text, borderRadius: borderRadius ?? '6px',
 		padding: padding ? `${ padding.top ?? 16 }px ${ padding.right ?? 20 }px ${ padding.bottom ?? 16 }px ${ padding.left ?? 20 }px` : '16px 20px',
 		borderLeft: borderLeftAccent ? `${ borderLeftAccentWidth ?? 4 }px solid ${ borderLeftAccentColor || defaults.border }` : undefined,
 		border: border?.style && border?.style !== 'none' ? `${ border.width ?? '1px' } ${ border.style } ${ border.color ?? defaults.border }` : `1px solid ${ defaults.border }`,
 		position: 'relative',
 	};
+	const hoverCss = backgroundHoverToCSS( uniqueId, background, ' .nexus-alert' );
 	return (
 		<div { ...blockProps }>
 			<div className={ `nexus-alert nx-alert-${ type }${ cssClasses ? ' ' + cssClasses : '' }${ dismissible ? ' is-dismissible' : '' }` }
 				style={ alertStyle }
 				{ ...(dismissCookie ? { 'data-cookie-id': `nx-alert-${ uniqueId }`, 'data-cookie-days': cookieDuration ?? 30 } : {} ) }
 			>
+				{ hoverCss && <style dangerouslySetInnerHTML={ { __html: hoverCss } } /> }
 				<div className="nx-alert-inner" style={ { display: 'flex', gap: 12, alignItems: 'flex-start' } }>
 					{ showIcon !== false && <i className={ iconClass || defaults.icon } style={ { fontSize: `${ iconSize ?? 20 }px`, color: iconColor || defaults.text, flexShrink: 0, marginTop: 2 } } /> }
 					<div className="nx-alert-body" style={ { flex: 1 } }>

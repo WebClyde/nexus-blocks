@@ -112,8 +112,8 @@
       "default": ""
     },
     "contentBackground": {
-      "type": "string",
-      "default": ""
+      "type": "object",
+      "default": {}
     },
     "contentPadding": {
       "type": "object",

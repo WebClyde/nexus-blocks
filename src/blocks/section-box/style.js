@@ -1,7 +1,9 @@
+import { backgroundToStyle } from '../../controls';
+
 export function buildSectionBoxRules( attributes ) {
 	const {
 		flexLayout, margin, padding, width, maxWidth, minHeight, overflow,
-		bgColor, bgGradient, enableGradient, bgImage, bgSize, bgPosition, bgRepeat, bgAttachment,
+		background,
 		overlayColor, overlayOpacity, borderColor, borderWidth, borderStyle, borderRadius, boxShadow
 	} = attributes;
 
@@ -22,12 +24,7 @@ export function buildSectionBoxRules( attributes ) {
 			'padding': padding?.top ? `${ padding.top } ${ padding.right } ${ padding.bottom } ${ padding.left }` : '40px 20px',
 
 			// Background
-			'background-color':      enableGradient ? undefined : ( bgColor || undefined ),
-			'background-image':      enableGradient && bgGradient ? bgGradient : ( bgImage ? `url('${ bgImage }')` : undefined ),
-			'background-size':       bgImage ? bgSize || 'cover' : undefined,
-			'background-position':   bgImage ? bgPosition || 'center center' : undefined,
-			'background-repeat':     bgImage ? bgRepeat || 'no-repeat' : undefined,
-			'background-attachment': bgImage ? bgAttachment || 'scroll' : undefined,
+			...backgroundToStyle( background ),
 
 			// Border
 			'border-color':  borderColor || undefined,
@@ -37,6 +34,8 @@ export function buildSectionBoxRules( attributes ) {
 			'box-shadow':    boxShadow || undefined,
 
 		},
+
+		':hover': backgroundToStyle( background?.hover ),
 
 		// Overlay pseudo-element
 		' > .nx-overlay': {

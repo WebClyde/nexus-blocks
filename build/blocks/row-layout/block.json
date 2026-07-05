@@ -68,33 +68,9 @@
       "type": "string",
       "default": ""
     },
-    "bgColor": {
-      "type": "string",
-      "default": ""
-    },
-    "bgGradient": {
-      "type": "string",
-      "default": ""
-    },
-    "enableGradient": {
-      "type": "boolean",
-      "default": false
-    },
-    "bgImage": {
-      "type": "string",
-      "default": ""
-    },
-    "bgSize": {
-      "type": "string",
-      "default": "cover"
-    },
-    "bgPosition": {
-      "type": "string",
-      "default": "center center"
-    },
-    "bgRepeat": {
-      "type": "string",
-      "default": "no-repeat"
+    "background": {
+      "type": "object",
+      "default": {}
     },
     "borderColor": {
       "type": "string",

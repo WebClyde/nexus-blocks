@@ -78,10 +78,6 @@
       "type": "string",
       "default": "#000000"
     },
-    "textShadow": {
-      "type": "object",
-      "default": {}
-    },
     "enableHighlight": {
       "type": "boolean",
       "default": false
@@ -123,10 +119,6 @@
       "default": ""
     },
     "cssClasses": {
-      "type": "string",
-      "default": ""
-    },
-    "customCSS": {
       "type": "string",
       "default": ""
     }

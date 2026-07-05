@@ -4,10 +4,10 @@
 import { __ } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
 import { InspectorControls, useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
-import { TextControl, SelectControl, ToggleControl } from '@wordpress/components';
+import { TextControl } from '@wordpress/components';
 import { useStyleOutput } from '../../hooks/useStyleOutput';
 import { buildRowLayoutRules } from './style';
-import { ColorControl, SpacingControl, AnimationControl, BorderControl } from '../../controls';
+import { BackgroundControl, SpacingControl, AnimationControl, BorderControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
 	ColorsAndBackgroundsPanel,
@@ -22,7 +22,7 @@ const TEMPLATE = [ [ 'core/paragraph', { placeholder: 'Add blocks inside this ro
 export default function Edit( { attributes, setAttributes } ) {
 	const {
 		uniqueId, flexLayout, columnGap, rowGap, margin, padding, width, maxWidth, minHeight,
-		bgColor, bgGradient, enableGradient, bgImage, bgSize, bgPosition, bgRepeat,
+		background,
 		borderColor, borderWidth, borderStyle, borderRadius, boxShadow,
 		animation, cssId, cssClasses
 	} = attributes;
@@ -61,27 +61,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				/>
 				
 				<ColorsAndBackgroundsPanel initialOpen={ false }>
-					<ColorControl label={ __( 'Background Color', 'nexus-blocks' ) } value={ bgColor } onChange={ ( v ) => setAttributes( { bgColor: v } ) } />
-					<ToggleControl label={ __( 'Use Gradient', 'nexus-blocks' ) } checked={ !! enableGradient } onChange={ ( v ) => setAttributes( { enableGradient: v } ) } />
-					{ enableGradient && <TextControl label={ __( 'Gradient CSS', 'nexus-blocks' ) } value={ bgGradient } onChange={ ( v ) => setAttributes( { bgGradient: v } ) } /> }
-					<TextControl label={ __( 'Background Image URL', 'nexus-blocks' ) } value={ bgImage } onChange={ ( v ) => setAttributes( { bgImage: v } ) } />
-					{ bgImage && (
-						<>
-							<SelectControl
-								label={ __( 'BG Size', 'nexus-blocks' ) }
-								value={ bgSize || 'cover' }
-								options={ [ { label: 'Cover', value: 'cover' }, { label: 'Contain', value: 'contain' }, { label: 'Auto', value: 'auto' } ] }
-								onChange={ ( v ) => setAttributes( { bgSize: v } ) }
-							/>
-							<TextControl label={ __( 'BG Position', 'nexus-blocks' ) }   value={ bgPosition } onChange={ ( v ) => setAttributes( { bgPosition: v } ) } />
-							<SelectControl
-								label={ __( 'BG Repeat', 'nexus-blocks' ) }
-								value={ bgRepeat || 'no-repeat' }
-								options={ [ { label: 'No Repeat', value: 'no-repeat' }, { label: 'Repeat', value: 'repeat' } ] }
-								onChange={ ( v ) => setAttributes( { bgRepeat: v } ) }
-							/>
-						</>
-					) }
+					<BackgroundControl value={ background } onChange={ ( v ) => setAttributes( { background: v } ) } />
 				</ColorsAndBackgroundsPanel>
 
 				<SizeAndSpacingPanel initialOpen={ true }>

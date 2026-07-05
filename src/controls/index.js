@@ -8,6 +8,6 @@ export { default as SpacingControl,    spacingToStyle, spacingToCSS } from './Sp
 export { default as ColorControl }                                     from './ColorControl';
 export { default as BoxShadowControl,  boxShadowToCSS }                from './BoxShadowControl';
 export { default as ResponsiveControl }                                from './ResponsiveControl';
-export { default as BackgroundControl, backgroundToStyle }             from './BackgroundControl';
+export { default as BackgroundControl, backgroundToStyle, backgroundHoverToCSS } from './BackgroundControl';
 export { default as AnimationControl,  animationToDataAttrs }          from './AnimationControl';
 export { default as IconControl }                                      from './IconControl';

@@ -6,7 +6,7 @@ import { useEffect } from '@wordpress/element';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl, ToggleControl, RangeControl, ButtonGroup, Button } from '@wordpress/components';
 import { generateUniqueId } from '../../hooks/useStyleOutput';
-import { TypographyControl, ColorControl, BorderControl, BoxShadowControl, BackgroundControl, SpacingControl, AnimationControl, IconControl } from '../../controls';
+import { TypographyControl, ColorControl, BorderControl, BoxShadowControl, BackgroundControl, backgroundToStyle, backgroundHoverToCSS, SpacingControl, AnimationControl, IconControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
 	ColorsAndBackgroundsPanel,
@@ -34,6 +34,7 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	const Tag = titleTag || 'h3';
 	const blockProps = useBlockProps( { 'data-nexus-id': uniqueId, id: cssId || undefined } );
+	const cardHoverCss = backgroundHoverToCSS( uniqueId, cardBackground, ' .nexus-icon-box' );
 
 	const iconWrapStyle = {
 		display:        'inline-flex', alignItems: 'center', justifyContent: 'center',
@@ -104,8 +105,9 @@ export default function Edit( { attributes, setAttributes } ) {
 
 			<div { ...blockProps }>
 				<div className={ `nexus-icon-box nx-pos-${ position ?? 'top' }${ hoverEffect ? ` nx-hover-${ hoverEffect }` : '' }` }
-					style={ { textAlign: alignment ?? 'left', padding: cardPadding ? `${ cardPadding.top ?? 24 }px ${ cardPadding.right ?? 24 }px ${ cardPadding.bottom ?? 24 }px ${ cardPadding.left ?? 24 }px` : '24px', borderRadius: cardBorderRadius || undefined, transition: `all ${ transitionDuration ?? 300 }ms ease`, display: position !== 'top' ? 'flex' : undefined, gap: iconSpacing ? `${ iconSpacing }px` : '16px', flexDirection: position === 'left' ? 'row' : position === 'right' ? 'row-reverse' : 'column', alignItems: position !== 'top' ? 'flex-start' : undefined } }
+					style={ { ...backgroundToStyle( cardBackground ), textAlign: alignment ?? 'left', padding: cardPadding ? `${ cardPadding.top ?? 24 }px ${ cardPadding.right ?? 24 }px ${ cardPadding.bottom ?? 24 }px ${ cardPadding.left ?? 24 }px` : '24px', borderRadius: cardBorderRadius || undefined, transition: `all ${ transitionDuration ?? 300 }ms ease`, display: position !== 'top' ? 'flex' : undefined, gap: iconSpacing ? `${ iconSpacing }px` : '16px', flexDirection: position === 'left' ? 'row' : position === 'right' ? 'row-reverse' : 'column', alignItems: position !== 'top' ? 'flex-start' : undefined } }
 				>
+					{ cardHoverCss && <style>{ cardHoverCss }</style> }
 					{ badgeText && <span className="nx-icon-box-badge">{ badgeText }</span> }
 					{ numberPrefix && <span className="nx-number-prefix" style={ { color: numberColor || 'var(--nx-color-primary,#7C3AED)' } }>{ numberPrefix }</span> }
 					{ iconClass && (

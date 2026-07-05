@@ -29,7 +29,6 @@
 		"enableStroke":    { "type": "boolean", "default": false },
 		"strokeWidth":     { "type": "string", "default": "1px" },
 		"strokeColor":     { "type": "string", "default": "#000000" },
-		"textShadow":      { "type": "object", "default": {} },
 		"enableHighlight": { "type": "boolean", "default": false },
 		"highlightText":   { "type": "string", "default": "" },
 		"highlightShape":  { "type": "string", "default": "underline" },
@@ -40,8 +39,7 @@
 		"padding":         { "type": "object", "default": {} },
 		"animation":       { "type": "object", "default": {} },
 		"cssId":           { "type": "string", "default": "" },
-		"cssClasses":      { "type": "string", "default": "" },
-		"customCSS":       { "type": "string", "default": "" }
+		"cssClasses":      { "type": "string", "default": "" }
 	},
 	"editorScript": "file:./index.js"
 }

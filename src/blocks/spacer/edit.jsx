@@ -6,7 +6,7 @@ import { useEffect } from '@wordpress/element';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, TextControl } from '@wordpress/components';
 import { generateUniqueId } from '../../hooks/useStyleOutput';
-import { ColorControl } from '../../controls';
+import { BackgroundControl, backgroundToStyle, backgroundHoverToCSS } from '../../controls';
 import {
 	SizeAndSpacingPanel,
 	ColorsAndBackgroundsPanel,
@@ -14,13 +14,14 @@ import {
 } from '../../panels';
 
 export default function Edit( { attributes, setAttributes } ) {
-	const { uniqueId, height, bgColor, cssId, cssClasses } = attributes;
+	const { uniqueId, height, background, cssId, cssClasses } = attributes;
 	useEffect( () => { if ( ! uniqueId ) setAttributes( { uniqueId: generateUniqueId() } ); }, [] );
 	const blockProps = useBlockProps( {
 		'data-nexus-id': uniqueId,
 		id: cssId || undefined,
-		style: { height: height ?? '60px', background: bgColor || 'transparent', display: 'block', width: '100%' },
+		style: { ...backgroundToStyle( background ), height: height ?? '60px', display: 'block', width: '100%' },
 	} );
+	const hoverCss = backgroundHoverToCSS( uniqueId, background );
 	return (
 		<>
 			<InspectorControls>
@@ -29,7 +30,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				</SizeAndSpacingPanel>
 
 				<ColorsAndBackgroundsPanel initialOpen={ false }>
-					<ColorControl label={ __( 'Background Color', 'nexus-blocks' ) } value={ bgColor } onChange={ ( v ) => setAttributes( { bgColor: v } ) } />
+					<BackgroundControl value={ background } onChange={ ( v ) => setAttributes( { background: v } ) } />
 				</ColorsAndBackgroundsPanel>
 
 				<DataAndSchemaPanel initialOpen={ false }>
@@ -38,6 +39,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				</DataAndSchemaPanel>
 			</InspectorControls>
 			<div { ...blockProps } className="nexus-spacer" aria-hidden="true">
+				{ hoverCss && <style>{ hoverCss }</style> }
 				<span className="nx-spacer-indicator">↕ { height ?? '60px' }</span>
 			</div>
 		</>

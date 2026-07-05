@@ -1,5 +1,6 @@
 /**
- * BackgroundControl — None / Solid / Gradient / Image background picker.
+ * BackgroundControl — None / Solid / Gradient / Image background picker,
+ * with an optional hover-state background nested under `value.hover`.
  */
 
 import { __ } from '@wordpress/i18n';
@@ -8,11 +9,12 @@ import {
 	SelectControl,
 	RangeControl,
 	ToggleControl,
-	__experimentalUnitControl as UnitControl,
+	Button,
 } from '@wordpress/components';
+import { useState } from '@wordpress/element';
 import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
-import { Button } from '@wordpress/components';
 import ColorControl from './ColorControl';
+import { camelToKebab } from '../hooks/useStyleOutput';
 
 const BG_TYPES = [
 	{ label: __( 'None', 'nexus-blocks' ),     value: 'none' },
@@ -52,16 +54,15 @@ const BLEND_MODES = [
 ];
 
 /**
- * @param {Object}   props
- * @param {Object}   props.value    - background attribute object
- * @param {Function} props.onChange
+ * Renders the Type + Solid/Gradient/Image fields for a single background
+ * value (used for both the base state and the hover state).
  */
-export default function BackgroundControl( { value = {}, onChange } ) {
+function BackgroundFields( { value = {}, onChange } ) {
 	const set = ( key ) => ( val ) => onChange( { ...value, [ key ]: val } );
 	const bgType = value.type ?? 'none';
 
 	return (
-		<BaseControl className="nx-background-control">
+		<>
 			<SelectControl
 				label={ __( 'Background Type', 'nexus-blocks' ) }
 				value={ bgType }
@@ -161,6 +162,41 @@ export default function BackgroundControl( { value = {}, onChange } ) {
 					/>
 				</>
 			) }
+		</>
+	);
+}
+
+/**
+ * @param {Object}   props
+ * @param {Object}   props.value    - background attribute object, e.g. { type, color, ..., hover: { type, color, ... } }
+ * @param {Function} props.onChange
+ */
+export default function BackgroundControl( { value = {}, onChange } ) {
+	const hoverType = value.hover?.type ?? 'none';
+	const [ showHover, setShowHover ] = useState( hoverType !== 'none' );
+
+	return (
+		<BaseControl className="nx-background-control">
+			<BackgroundFields value={ value } onChange={ onChange } />
+
+			<ToggleControl
+				className="nx-background-hover-toggle"
+				label={ __( 'Different Background on Hover', 'nexus-blocks' ) }
+				checked={ showHover }
+				onChange={ ( checked ) => {
+					setShowHover( checked );
+					if ( ! checked ) onChange( { ...value, hover: {} } );
+				} }
+			/>
+
+			{ showHover && (
+				<div className="nx-background-hover-fields">
+					<BackgroundFields
+						value={ value.hover ?? {} }
+						onChange={ ( hover ) => onChange( { ...value, hover } ) }
+					/>
+				</div>
+			) }
 		</BaseControl>
 	);
 }
@@ -190,4 +226,29 @@ export function backgroundToStyle( bg = {} ) {
 	}
 
 	return {};
+}
+
+/**
+ * Build a scoped `:hover` CSS rule string for a background's hover state.
+ * Returns '' when there's no hover background set, so callers can do
+ * `{ css && <style>{ css }</style> }` unconditionally.
+ *
+ * @param {string} uniqueId  Block's unique ID (matches its data-nexus-id attribute)
+ * @param {Object} bg        The background attribute object (reads bg.hover)
+ * @param {string} selector  Selector suffix for the element that carries the
+ *                           background, e.g. ' .nexus-button' or '' for the
+ *                           data-nexus-id element itself.
+ */
+export function backgroundHoverToCSS( uniqueId, bg, selector = '' ) {
+	if ( ! uniqueId || ! bg?.hover ) return '';
+
+	const style = backgroundToStyle( bg.hover );
+	const declarations = Object.entries( style )
+		.filter( ( [ , v ] ) => v !== undefined && v !== null && v !== '' )
+		.map( ( [ prop, val ] ) => `  ${ camelToKebab( prop ) }: ${ val };` )
+		.join( '\n' );
+
+	if ( ! declarations ) return '';
+
+	return `[data-nexus-id="${ uniqueId }"]${ selector }:hover {\n${ declarations }\n}`;
 }

@@ -71,8 +71,8 @@
 			"default": 4
 		},
 		"contentBackground": {
-			"type": "string",
-			"default": ""
+			"type": "object",
+			"default": {}
 		},
 		"contentBorder": {
 			"type": "object",

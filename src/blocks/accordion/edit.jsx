@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n';
 import { useEffect, useState } from '@wordpress/element';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl, RangeControl, ToggleControl, Button } from '@wordpress/components';
-import { TypographyControl, ColorControl, BorderControl, SpacingControl, AnimationControl, IconControl } from '../../controls';
+import { TypographyControl, ColorControl, BackgroundControl, BorderControl, SpacingControl, AnimationControl, IconControl } from '../../controls';
 import { useStyleOutput } from '../../hooks/useStyleOutput';
 import { buildAccordionRules } from './style';
 import {
@@ -73,7 +73,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<ColorControl label={ __( 'Header Active BG', 'nexus-blocks' ) } value={ headerBgActive } onChange={ ( v ) => setAttributes( { headerBgActive: v } ) } />
 					<ColorControl label={ __( 'Icon Color', 'nexus-blocks' ) } value={ iconColor } onChange={ ( v ) => setAttributes( { iconColor: v } ) } />
 					<ColorControl label={ __( 'Icon Active Color', 'nexus-blocks' ) } value={ iconColorActive } onChange={ ( v ) => setAttributes( { iconColorActive: v } ) } />
-					<ColorControl label={ __( 'Content Background', 'nexus-blocks' ) } value={ contentBackground } onChange={ ( v ) => setAttributes( { contentBackground: v } ) } />
+					<BackgroundControl value={ contentBackground } onChange={ ( v ) => setAttributes( { contentBackground: v } ) } />
 				</ColorsAndBackgroundsPanel>
 
 				<SizeAndSpacingPanel initialOpen={ false }>

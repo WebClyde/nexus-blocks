@@ -6,7 +6,7 @@ import { useEffect } from '@wordpress/element';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl, ToggleControl, RangeControl, ButtonGroup, Button } from '@wordpress/components';
 import { generateUniqueId } from '../../hooks/useStyleOutput';
-import { TypographyControl, ColorControl, BorderControl, BoxShadowControl, SpacingControl, AnimationControl } from '../../controls';
+import { TypographyControl, ColorControl, BorderControl, BoxShadowControl, BackgroundControl, backgroundToStyle, backgroundHoverToCSS, SpacingControl, AnimationControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
 	ColorsAndBackgroundsPanel,
@@ -28,9 +28,9 @@ const SIZE_PADDING = { xs: '6px 12px', sm: '8px 16px', md: '12px 24px', lg: '16p
 export default function Edit( { attributes, setAttributes } ) {
 	const {
 		uniqueId, text, linkUrl, linkTarget, linkNofollow, buttonSize, alignment,
-		textColor, bgColor, bgGradient, enableGradient, typography,
+		textColor, background, typography,
 		border, borderRadius, boxShadow,
-		hoverTextColor, hoverBgColor, hoverAnimation, transitionDuration,
+		hoverTextColor, hoverAnimation, transitionDuration,
 		iconClass, iconPosition, iconSize, iconGap,
 		margin, padding, cssId, cssClasses, animation,
 	} = attributes;
@@ -41,7 +41,8 @@ export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps( { 'data-nexus-id': uniqueId, id: cssId || undefined, style: { textAlign: alignment ?? 'left' } } );
 
 	const btnStyle = {
-		background:    enableGradient ? bgGradient : ( bgColor || 'var(--nx-color-primary, #7C3AED)' ),
+		background:    'var(--nx-color-primary, #7C3AED)',
+		...backgroundToStyle( background ),
 		color:         textColor || '#fff',
 		padding:       SIZE_PADDING[ btnSize ],
 		borderRadius:  borderRadius || '6px',
@@ -55,6 +56,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		cursor:        'pointer',
 		textDecoration: 'none',
 	};
+	const bgHoverCss = backgroundHoverToCSS( uniqueId, background, ' .nexus-button' );
 
 	return (
 		<>
@@ -91,13 +93,8 @@ export default function Edit( { attributes, setAttributes } ) {
 
 				<ColorsAndBackgroundsPanel initialOpen={ false }>
 					<ColorControl label={ __( 'Text Color', 'nexus-blocks' ) } value={ textColor } onChange={ ( v ) => setAttributes( { textColor: v } ) } />
-					<ToggleControl label={ __( 'Gradient Background', 'nexus-blocks' ) } checked={ !! enableGradient } onChange={ ( v ) => setAttributes( { enableGradient: v } ) } />
-					{ enableGradient
-						? <TextControl label={ __( 'Gradient CSS', 'nexus-blocks' ) } value={ bgGradient ?? '' } onChange={ ( v ) => setAttributes( { bgGradient: v } ) } />
-						: <ColorControl label={ __( 'Background Color', 'nexus-blocks' ) } value={ bgColor } onChange={ ( v ) => setAttributes( { bgColor: v } ) } />
-					}
+					<BackgroundControl value={ background } onChange={ ( v ) => setAttributes( { background: v } ) } />
 					<ColorControl label={ __( 'Hover Text Color', 'nexus-blocks' ) } value={ hoverTextColor } onChange={ ( v ) => setAttributes( { hoverTextColor: v } ) } />
-					<ColorControl label={ __( 'Hover BG Color', 'nexus-blocks' ) } value={ hoverBgColor } onChange={ ( v ) => setAttributes( { hoverBgColor: v } ) } />
 				</ColorsAndBackgroundsPanel>
 
 				<InteractionsPanel initialOpen={ false }>
@@ -116,10 +113,10 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div { ...blockProps }>
+				{ bgHoverCss && <style>{ bgHoverCss }</style> }
 				<a href={ linkUrl || '#' } className={ `nexus-button nx-btn-${ btnSize }${ hoverAnimation ? ` nx-hover-${ hoverAnimation }` : '' }` }
 					style={ btnStyle }
 					data-hover-text-color={ hoverTextColor || undefined }
-					data-hover-bg-color={ hoverBgColor || undefined }
 				>
 					{ iconClass && iconPosition !== 'after' && <i className={ `fa ${ iconClass }` } style={ { fontSize: iconSize ? `${ iconSize }px` : undefined } } /> }
 					{ text || __( 'Click Here', 'nexus-blocks' ) }

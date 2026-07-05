@@ -1,6 +1,12 @@
 /**
  * Nexus Blocks — Editor entry point.
- * Registers the custom block category and imports all blocks.
+ * Registers the custom block category, the global settings sidebar, and the
+ * layout-item hook that applies to every block.
+ *
+ * Individual blocks are NOT imported here — each one ships as its own
+ * bundle (build/blocks/<name>/index.js) via block.json's `editorScript`,
+ * auto-enqueued by Nexus_Loader::register_blocks() in PHP. Importing them
+ * here too would double-bundle every block and double-register them.
  */
 
 import { getCategories, setCategories } from '@wordpress/blocks';
@@ -23,24 +29,6 @@ setCategories( [
 	},
 	...getCategories(),
 ] );
-
-// Block registrations
-import './blocks/advanced-heading';
-import './blocks/advanced-text';
-import './blocks/advanced-image';
-import './blocks/advanced-button';
-import './blocks/icon';
-import './blocks/divider';
-import './blocks/spacer';
-import './blocks/icon-box';
-import './blocks/image-box';
-import './blocks/icon-list';
-import './blocks/counter';
-import './blocks/progress-bar';
-import './blocks/star-rating';
-import './blocks/tabs';
-import './blocks/accordion';
-import './blocks/alert';
 
 // Global panel sidebar
 import './global-panel';

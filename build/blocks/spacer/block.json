@@ -26,9 +26,9 @@
       "type": "string",
       "default": "60px"
     },
-    "bgColor": {
-      "type": "string",
-      "default": ""
+    "background": {
+      "type": "object",
+      "default": {}
     },
     "cssId": {
       "type": "string",

@@ -50,17 +50,9 @@
       "type": "string",
       "default": ""
     },
-    "bgColor": {
-      "type": "string",
-      "default": ""
-    },
-    "bgGradient": {
-      "type": "string",
-      "default": ""
-    },
-    "enableGradient": {
-      "type": "boolean",
-      "default": false
+    "background": {
+      "type": "object",
+      "default": {}
     },
     "typography": {
       "type": "object",
@@ -79,10 +71,6 @@
       "default": {}
     },
     "hoverTextColor": {
-      "type": "string",
-      "default": ""
-    },
-    "hoverBgColor": {
       "type": "string",
       "default": ""
     },

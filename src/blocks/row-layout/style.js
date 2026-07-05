@@ -1,8 +1,10 @@
+import { backgroundToStyle } from '../../controls';
+
 export function buildRowLayoutRules( attributes ) {
 	const {
 		flexLayout, columnGap, rowGap, margin, padding,
-		width, maxWidth, minHeight, bgColor, bgGradient, enableGradient,
-		bgImage, bgSize, bgPosition, bgRepeat, borderColor, borderWidth, borderStyle, borderRadius, boxShadow
+		width, maxWidth, minHeight, background,
+		borderColor, borderWidth, borderStyle, borderRadius, boxShadow
 	} = attributes;
 
 	const isFlex = !flexLayout?.display || flexLayout.display === 'flex' || flexLayout.display === 'inline-flex';
@@ -21,11 +23,7 @@ export function buildRowLayoutRules( attributes ) {
 			'padding':    padding?.top ? `${ padding.top } ${ padding.right } ${ padding.bottom } ${ padding.left }` : undefined,
 
 			// Background
-			'background-color':    enableGradient ? undefined : ( bgColor || undefined ),
-			'background-image':    enableGradient && bgGradient ? bgGradient : ( bgImage ? `url('${ bgImage }')` : undefined ),
-			'background-size':     bgImage ? bgSize || 'cover' : undefined,
-			'background-position': bgImage ? bgPosition || 'center center' : undefined,
-			'background-repeat':   bgImage ? bgRepeat || 'no-repeat' : undefined,
+			...backgroundToStyle( background ),
 
 			// Border
 			'border-color':  borderColor || undefined,
@@ -34,6 +32,8 @@ export function buildRowLayoutRules( attributes ) {
 			'border-radius': borderRadius || undefined,
 			'box-shadow':    boxShadow || undefined,
 		},
+
+		':hover': backgroundToStyle( background?.hover ),
 
 		// Inner Layout Wrapper
 		' > .nx-row-inner': {

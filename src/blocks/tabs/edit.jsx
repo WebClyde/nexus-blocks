@@ -7,7 +7,7 @@ import { InspectorControls, InnerBlocks, useBlockProps } from '@wordpress/block-
 import { useSelect } from '@wordpress/data';
 import { TextControl, SelectControl, RangeControl } from '@wordpress/components';
 import { generateUniqueId } from '../../hooks/useStyleOutput';
-import { TypographyControl, ColorControl, BorderControl, SpacingControl, AnimationControl } from '../../controls';
+import { TypographyControl, ColorControl, BackgroundControl, backgroundToStyle, backgroundHoverToCSS, BorderControl, SpacingControl, AnimationControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
 	ColorsAndBackgroundsPanel,
@@ -28,6 +28,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	useEffect( () => { if ( ! uniqueId ) setAttributes( { uniqueId: generateUniqueId() } ); }, [] );
 	
 	const blockProps = useBlockProps( { 'data-nexus-id': uniqueId, id: cssId || undefined } );
+	const contentHoverCss = backgroundHoverToCSS( uniqueId, contentBackground, ' .nx-tab-panels' );
 
 	const childBlocks = useSelect( ( select ) => {
 		return select( 'core/block-editor' ).getBlocks( clientId );
@@ -75,7 +76,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					{ activeIndicator !== 'none' && activeIndicator !== 'fill' && (
 						<ColorControl label={ __( 'Indicator Color', 'nexus-blocks' ) } value={ indicatorColor } onChange={ ( v ) => setAttributes( { indicatorColor: v } ) } />
 					) }
-					<ColorControl label={ __( 'Content Background', 'nexus-blocks' ) } value={ contentBackground } onChange={ ( v ) => setAttributes( { contentBackground: v } ) } />
+					<BackgroundControl value={ contentBackground } onChange={ ( v ) => setAttributes( { contentBackground: v } ) } />
 				</ColorsAndBackgroundsPanel>
 
 				<DataAndSchemaPanel initialOpen={ false }>
@@ -116,7 +117,8 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							</div>
 						) }
 					</div>
-					<div className="nx-tab-panels" style={ { flex: 1, background: contentBackground || undefined, padding: '20px', border: contentBorder?.style && contentBorder?.style !== 'none' ? `${ contentBorder.width ?? '1px' } ${ contentBorder.style } ${ contentBorder.color ?? '#E5E7EB' }` : undefined } }>
+					<div className="nx-tab-panels" style={ { flex: 1, ...backgroundToStyle( contentBackground ), padding: '20px', border: contentBorder?.style && contentBorder?.style !== 'none' ? `${ contentBorder.width ?? '1px' } ${ contentBorder.style } ${ contentBorder.color ?? '#E5E7EB' }` : undefined } }>
+						{ contentHoverCss && <style>{ contentHoverCss }</style> }
 						<InnerBlocks
 							allowedBlocks={ [ 'nexus-blocks/tab-item' ] }
 							template={ [

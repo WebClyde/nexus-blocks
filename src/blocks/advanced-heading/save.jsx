@@ -3,40 +3,22 @@
  */
 
 import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { buildTextStyle, buildWrapperStyle } from './style-utils';
 
 export default function Save( { attributes } ) {
 	const {
 		uniqueId, content, tag: Tag = 'h2',
-		alignment, linkUrl, linkTarget, linkNofollow,
-		textColor, enableGradient, gradient, typography,
-		enableStroke, strokeWidth, strokeColor,
+		linkUrl, linkTarget, linkNofollow,
 		cssId, cssClasses, animation,
 	} = attributes;
 
-	const textStyle = {
-		color: textColor || undefined,
-		textAlign: alignment || undefined,
-		...(enableGradient ? {
-			backgroundImage: `linear-gradient(${ gradient?.angle ?? 135 }deg, ${ gradient?.start ?? '#7C3AED' }, ${ gradient?.end ?? '#06B6D4' })`,
-			WebkitBackgroundClip: 'text',
-			WebkitTextFillColor:  'transparent',
-			backgroundClip:       'text',
-		} : {}),
-		...(enableStroke ? {
-			WebkitTextStroke: `${ strokeWidth } ${ strokeColor }`,
-		} : {}),
-		...( typography?.fontFamily    ? { fontFamily:    typography.fontFamily }    : {} ),
-		...( typography?.fontSize      ? { fontSize:      typography.fontSize }      : {} ),
-		...( typography?.fontWeight    ? { fontWeight:    typography.fontWeight }    : {} ),
-		...( typography?.lineHeight    ? { lineHeight:    typography.lineHeight }    : {} ),
-		...( typography?.letterSpacing ? { letterSpacing: typography.letterSpacing } : {} ),
-		...( typography?.textTransform ? { textTransform: typography.textTransform } : {} ),
-	};
+	const textStyle = buildTextStyle( attributes );
 
 	const blockProps = useBlockProps.save( {
 		className: `nx-heading-wrapper${ cssClasses ? ' ' + cssClasses : '' }`,
 		'data-nexus-id': uniqueId,
 		id: cssId || undefined,
+		style: buildWrapperStyle( attributes ),
 		...(animation?.animation ? {
 			'data-nx-animation': animation.animation,
 			'data-nx-duration':  animation.duration ?? 600,

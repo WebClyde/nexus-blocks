@@ -6,7 +6,7 @@ import { useEffect } from '@wordpress/element';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl, RangeControl, ToggleControl, ButtonGroup, Button } from '@wordpress/components';
 import { generateUniqueId } from '../../hooks/useStyleOutput';
-import { ColorControl, BackgroundControl, BorderControl, BoxShadowControl, SpacingControl, AnimationControl, IconControl } from '../../controls';
+import { ColorControl, BackgroundControl, backgroundToStyle, backgroundHoverToCSS, BorderControl, BoxShadowControl, SpacingControl, AnimationControl, IconControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
 	ColorsAndBackgroundsPanel,
@@ -35,7 +35,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	const {
 		uniqueId, iconClass, iconView, iconShape, linkUrl, linkTarget, alignment,
 		tooltipText, tooltipPosition,
-		iconColor, iconHoverColor, bgColor, bgHoverColor, iconSize, padding,
+		iconColor, iconHoverColor, background, iconSize, padding,
 		rotate, border, borderRadius, boxShadow, hoverAnimation, transitionDuration,
 		margin, cssId, cssClasses, animation,
 	} = attributes;
@@ -49,6 +49,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	const size    = iconSize ?? 48;
 	const pad     = padding?.top ? parseInt( padding.top ) : 16;
 	const shapeRadius = shape === 'circle' ? '50%' : shape === 'rounded' ? '12px' : '0';
+	const bgHoverCss  = view === 'stacked' ? backgroundHoverToCSS( uniqueId, background, ' .nexus-icon' ) : '';
 
 	const wrapStyle = {
 		display:        'inline-flex',
@@ -57,7 +58,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		width:          view !== 'default' ? `${ size + pad * 2 }px` : undefined,
 		height:         view !== 'default' ? `${ size + pad * 2 }px` : undefined,
 		borderRadius:   view !== 'default' ? shapeRadius : undefined,
-		background:     view === 'stacked' ? ( bgColor || 'var(--nx-color-primary,#7C3AED)' ) : undefined,
+		...( view === 'stacked' ? { background: 'var(--nx-color-primary,#7C3AED)', ...backgroundToStyle( background ) } : {} ),
 		border:         view === 'framed' && border ? `${ border.width ?? '2px' } ${ border.style ?? 'solid' } ${ border.color ?? 'var(--nx-color-primary,#7C3AED)' }` : undefined,
 		transform:      rotate ? `rotate(${ rotate }deg)` : undefined,
 		transition:     `all ${ transitionDuration ?? 300 }ms ease`,
@@ -96,10 +97,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<ColorControl label={ __( 'Icon Color', 'nexus-blocks' ) } value={ iconColor } onChange={ ( v ) => setAttributes( { iconColor: v } ) } />
 					<ColorControl label={ __( 'Icon Hover Color', 'nexus-blocks' ) } value={ iconHoverColor } onChange={ ( v ) => setAttributes( { iconHoverColor: v } ) } />
 					{ view !== 'default' && (
-						<>
-							<ColorControl label={ __( 'Background Color', 'nexus-blocks' ) } value={ bgColor } onChange={ ( v ) => setAttributes( { bgColor: v } ) } />
-							<ColorControl label={ __( 'Background Hover Color', 'nexus-blocks' ) } value={ bgHoverColor } onChange={ ( v ) => setAttributes( { bgHoverColor: v } ) } />
-						</>
+						<BackgroundControl value={ background } onChange={ ( v ) => setAttributes( { background: v } ) } />
 					) }
 				</ColorsAndBackgroundsPanel>
 
@@ -121,6 +119,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					style={ wrapStyle }
 					{ ...(tooltipText ? { 'data-tooltip': tooltipText, 'data-tooltip-pos': tooltipPosition ?? 'top' } : {} ) }
 				>
+					{ bgHoverCss && <style>{ bgHoverCss }</style> }
 					{ iconClass
 						? <i className={ iconClass } style={ iconStyle } />
 						: <span style={ { ...iconStyle, fontFamily: 'monospace' } }>★</span>

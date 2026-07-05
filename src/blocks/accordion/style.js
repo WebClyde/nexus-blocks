@@ -1,3 +1,5 @@
+import { backgroundToStyle } from '../../controls';
+
 // Default modern accordion palette
 const DEF_TITLE_COLOR       = '#1e293b'; // slate-900
 const DEF_TITLE_ACTIVE      = '#4f46e5'; // indigo-600
@@ -155,10 +157,12 @@ export function buildAccordionRules( attributes ) {
 
 		// Content area
 		' .nx-accordion-content': {
-			'background-color': contentBackground || DEF_CONTENT_BG,
+			'background-color': DEF_CONTENT_BG,
+			...backgroundToStyle( contentBackground ),
 			'border-top': contentBorderVal !== 'none' ? contentBorderVal : `1px solid ${ DEF_BORDER_COLOR }`,
 			'overflow': 'hidden',
 		},
+		' .nx-accordion-content:hover': backgroundToStyle( contentBackground?.hover ),
 		' .nx-accordion-content-inner': {
 			'padding': contentPadding?.top
 				? `${ contentPadding.top } ${ contentPadding.right } ${ contentPadding.bottom } ${ contentPadding.left }`

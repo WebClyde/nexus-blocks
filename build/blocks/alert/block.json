@@ -54,9 +54,9 @@
       "type": "number",
       "default": 30
     },
-    "bgColor": {
-      "type": "string",
-      "default": ""
+    "background": {
+      "type": "object",
+      "default": {}
     },
     "textColor": {
       "type": "string",

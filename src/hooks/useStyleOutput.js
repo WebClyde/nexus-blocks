@@ -51,7 +51,7 @@ export function useStyleOutput( uniqueId, buildRules, attributes ) {
 }
 
 /** Convert camelCase CSS prop to kebab-case */
-function camelToKebab( str ) {
+export function camelToKebab( str ) {
 	return str.replace( /([A-Z])/g, ( m ) => `-${ m.toLowerCase() }` );
 }
 

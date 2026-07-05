@@ -6,7 +6,7 @@ import { useEffect, useState } from '@wordpress/element';
 import { InspectorControls, RichText, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl, RangeControl, ToggleControl } from '@wordpress/components';
 import { generateUniqueId } from '../../hooks/useStyleOutput';
-import { TypographyControl, ColorControl, BorderControl, BoxShadowControl, SpacingControl, AnimationControl, IconControl } from '../../controls';
+import { TypographyControl, ColorControl, BorderControl, BoxShadowControl, BackgroundControl, backgroundToStyle, backgroundHoverToCSS, SpacingControl, AnimationControl, IconControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
 	ColorsAndBackgroundsPanel,
@@ -32,7 +32,7 @@ const TYPE_DEFAULTS = {
 };
 
 export default function Edit( { attributes, setAttributes } ) {
-	const { uniqueId, alertType, title, description, iconClass, showIcon, dismissible, dismissCookie, cookieDuration, bgColor, textColor, iconColor, iconSize, border, borderLeftAccent, borderLeftAccentColor, borderLeftAccentWidth, borderRadius, boxShadow, padding, titleTypography, descTypography, titleColorOverride, dismissBtnColor, cssId, cssClasses, margin, animation } = attributes;
+	const { uniqueId, alertType, title, description, iconClass, showIcon, dismissible, dismissCookie, cookieDuration, background, textColor, iconColor, iconSize, border, borderLeftAccent, borderLeftAccentColor, borderLeftAccentWidth, borderRadius, boxShadow, padding, titleTypography, descTypography, titleColorOverride, dismissBtnColor, cssId, cssClasses, margin, animation } = attributes;
 	useEffect( () => { if ( ! uniqueId ) setAttributes( { uniqueId: generateUniqueId() } ); }, [] );
 	const [ dismissed, setDismissed ] = useState( false );
 	if ( dismissed ) return null;
@@ -42,7 +42,8 @@ export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps( { 'data-nexus-id': uniqueId, id: cssId || undefined } );
 
 	const alertStyle = {
-		background:   bgColor || defaults.bg,
+		background:   defaults.bg,
+		...backgroundToStyle( background ),
 		color:        textColor || defaults.text,
 		borderRadius: borderRadius ?? '6px',
 		padding:      padding ? `${ padding.top ?? 16 }px ${ padding.right ?? 20 }px ${ padding.bottom ?? 16 }px ${ padding.left ?? 20 }px` : '16px 20px',
@@ -50,6 +51,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		border:       border?.style && border?.style !== 'none' ? `${ border.width ?? '1px' } ${ border.style } ${ border.color ?? defaults.border }` : `1px solid ${ defaults.border }`,
 		position:     'relative',
 	};
+	const hoverCss = backgroundHoverToCSS( uniqueId, background, ' .nexus-alert' );
 
 	return (
 		<>
@@ -84,7 +86,7 @@ export default function Edit( { attributes, setAttributes } ) {
 
 				<ColorsAndBackgroundsPanel initialOpen={ false }>
 					<SelectControl label={ __( 'Preset Theme', 'nexus-blocks' ) } value={ type } options={ ALERT_TYPES } onChange={ ( v ) => setAttributes( { alertType: v } ) } />
-					<ColorControl label={ __( 'Background', 'nexus-blocks' ) } value={ bgColor } onChange={ ( v ) => setAttributes( { bgColor: v } ) } />
+					<BackgroundControl value={ background } onChange={ ( v ) => setAttributes( { background: v } ) } />
 					<ColorControl label={ __( 'Text Color', 'nexus-blocks' ) } value={ textColor } onChange={ ( v ) => setAttributes( { textColor: v } ) } />
 					<ColorControl label={ __( 'Icon Color', 'nexus-blocks' ) } value={ iconColor } onChange={ ( v ) => setAttributes( { iconColor: v } ) } />
 					{ borderLeftAccent && (
@@ -111,6 +113,7 @@ export default function Edit( { attributes, setAttributes } ) {
 
 			<div { ...blockProps }>
 				<div className={ `nexus-alert nx-alert-${ type }` } style={ alertStyle }>
+					{ hoverCss && <style>{ hoverCss }</style> }
 					<div className="nx-alert-inner" style={ { display: 'flex', gap: 12, alignItems: 'flex-start' } }>
 						{ showIcon !== false && (
 							<i className={ iconClass || defaults.icon } style={ { fontSize: `${ iconSize ?? 20 }px`, color: iconColor || defaults.text, flexShrink: 0, marginTop: 2 } } />

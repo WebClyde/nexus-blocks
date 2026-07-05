@@ -1,6 +1,7 @@
 import { useBlockProps } from '@wordpress/block-editor';
+import { backgroundToStyle, backgroundHoverToCSS } from '../../controls';
 export default function Save( { attributes } ) {
-	const { uniqueId, iconClass, iconView, iconShape, linkUrl, linkTarget, alignment, tooltipText, tooltipPosition, iconColor, bgColor, iconSize, rotate, border, hoverAnimation, transitionDuration, cssId, cssClasses, animation } = attributes;
+	const { uniqueId, iconClass, iconView, iconShape, linkUrl, linkTarget, alignment, tooltipText, tooltipPosition, iconColor, background, iconSize, rotate, border, hoverAnimation, transitionDuration, cssId, cssClasses, animation } = attributes;
 	const view = iconView ?? 'default'; const shape = iconShape ?? 'circle'; const size = iconSize ?? 48;
 	const shapeRadius = shape === 'circle' ? '50%' : shape === 'rounded' ? '12px' : '0';
 	const blockProps = useBlockProps.save( {
@@ -12,11 +13,12 @@ export default function Save( { attributes } ) {
 		width:  view !== 'default' ? `${ size + 32 }px` : undefined,
 		height: view !== 'default' ? `${ size + 32 }px` : undefined,
 		borderRadius: view !== 'default' ? shapeRadius : undefined,
-		background: view === 'stacked' ? ( bgColor || 'var(--nx-color-primary,#7C3AED)' ) : undefined,
+		...( view === 'stacked' ? { background: 'var(--nx-color-primary,#7C3AED)', ...backgroundToStyle( background ) } : {} ),
 		border:     view === 'framed' && border ? `${ border.width ?? '2px' } ${ border.style ?? 'solid' } ${ border.color ?? 'var(--nx-color-primary,#7C3AED)' }` : undefined,
 		transform:  rotate ? `rotate(${ rotate }deg)` : undefined,
 		transition: `all ${ transitionDuration ?? 300 }ms ease`,
 	};
+	const bgHoverCss = view === 'stacked' ? backgroundHoverToCSS( uniqueId, background, ' .nexus-icon' ) : '';
 	const iconEl = (
 		<div className={ `nexus-icon nx-icon-${ view }${ hoverAnimation ? ` nx-hover-${ hoverAnimation }` : '' }` }
 			style={ wrapStyle }
@@ -27,6 +29,7 @@ export default function Save( { attributes } ) {
 	);
 	return (
 		<div { ...blockProps }>
+			{ bgHoverCss && <style dangerouslySetInnerHTML={ { __html: bgHoverCss } } /> }
 			{ linkUrl ? ( <a href={ linkUrl } target={ linkTarget ? '_blank' : undefined } rel="noreferrer">{ iconEl }</a> ) : iconEl }
 		</div>
 	);
