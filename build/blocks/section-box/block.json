@@ -102,5 +102,8 @@
     }
   },
   "editorScript": "file:./index.js",
-  "icon": "layout"
+  "icon": {
+    "src": "layout",
+    "foreground": "#7C3AED"
+  }
 }

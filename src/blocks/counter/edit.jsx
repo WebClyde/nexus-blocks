@@ -2,10 +2,9 @@
  * Counter — Edit
  */
 import { __ } from '@wordpress/i18n';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl, RangeControl, ToggleControl, ButtonGroup, Button } from '@wordpress/components';
-import { generateUniqueId } from '../../hooks/useStyleOutput';
 import { TypographyControl, ColorControl, BackgroundControl, BorderControl, BoxShadowControl, SpacingControl, AnimationControl, IconControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
@@ -19,10 +18,10 @@ const SEPARATORS = [ { label: 'None', value: '' }, { label: 'Comma', value: ',' 
 const ANIM_TYPES = [ { label: 'Count Up', value: 'countup' }, { label: 'Odometer', value: 'odometer' } ];
 const TITLE_POS  = [ { label: 'Above', value: 'above' }, { label: 'Below', value: 'below' } ];
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const { uniqueId, startNumber, endNumber, prefix, suffix, duration, separator, decimalPlaces, animationType, title, titlePosition, iconClass, numberColor, numberTypography, prefixSuffixColor, prefixSuffixTypography, titleColor, titleTypography, titleSpacing, iconColor, iconSize, iconSpacing, background, border, borderRadius, boxShadow, cardPadding, alignment, margin, cssId, cssClasses, animation } = attributes;
 	const [ count, setCount ] = useState( startNumber ?? 0 );
-	useEffect( () => { if ( ! uniqueId ) setAttributes( { uniqueId: generateUniqueId() } ); }, [] );
+	useEffect( () => { const expected = `nx-${ clientId.slice( 0, 8 ) }`; if ( uniqueId !== expected ) setAttributes( { uniqueId: expected } ); }, [ clientId ] );
 	const blockProps = useBlockProps( { 'data-nexus-id': uniqueId, id: cssId || undefined } );
 	const end = endNumber ?? 1000;
 	const start = startNumber ?? 0;

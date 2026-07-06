@@ -5,7 +5,6 @@ import { __ } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
 import { InspectorControls, RichText, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, RangeControl, SelectControl, ToggleControl, TextControl, ButtonGroup, Button } from '@wordpress/components';
-import { generateUniqueId } from '../../hooks/useStyleOutput';
 import { TypographyControl, ColorControl, SpacingControl, AnimationControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
@@ -21,14 +20,14 @@ const COLUMN_RULES = [
 	{ label: 'Dotted', value: 'dotted' },
 ];
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
 		uniqueId, content, alignment, textColor, typography, dropCap,
 		columns, columnGap, columnRule, columnRuleWidth, columnRuleColor,
 		linkColor, linkHoverColor, cssId, cssClasses, margin, padding, animation,
 	} = attributes;
 
-	useEffect( () => { if ( ! uniqueId ) setAttributes( { uniqueId: generateUniqueId() } ); }, [] );
+	useEffect( () => { const expected = `nx-${ clientId.slice( 0, 8 ) }`; if ( uniqueId !== expected ) setAttributes( { uniqueId: expected } ); }, [ clientId ] );
 
 	const blockProps = useBlockProps( {
 		'data-nexus-id': uniqueId,

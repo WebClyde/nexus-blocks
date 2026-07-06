@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "nexus-blocks/row-layout",
   "version": "1.0.0",
-  "title": "Row Layout / Container",
+  "title": "Row Layout",
   "category": "nexus-blocks",
   "description": "A flex/grid container row for building multi-column layouts.",
   "keywords": [
@@ -106,5 +106,8 @@
     }
   },
   "editorScript": "file:./index.js",
-  "icon": "columns"
+  "icon": {
+    "src": "columns",
+    "foreground": "#7C3AED"
+  }
 }

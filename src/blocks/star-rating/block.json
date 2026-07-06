@@ -96,5 +96,5 @@
 		}
 	},
 	"editorScript": "file:./index.js",
-	"icon": "star-half"
+	"icon": { "src": "star-half", "foreground": "#7C3AED" }
 }

@@ -5,7 +5,6 @@ import { __ } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
 import { InspectorControls, MediaUpload, MediaUploadCheck, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, ToggleControl, RangeControl, TextControl, Button } from '@wordpress/components';
-import { generateUniqueId } from '../../hooks/useStyleOutput';
 import { ColorControl, BorderControl, BoxShadowControl, SpacingControl, AnimationControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
@@ -38,7 +37,7 @@ const OVERLAY_ANIMS = [
 	{ label: 'Zoom Out',   value: 'zoomOut' },
 ];
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
 		uniqueId, imageId, imageUrl, imageAlt, imageSize, alignment,
 		caption, captionType, captionText, linkType, linkUrl, openLightbox,
@@ -47,7 +46,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		overlayAnimation, cssId, cssClasses, margin, padding, animation,
 	} = attributes;
 
-	useEffect( () => { if ( ! uniqueId ) setAttributes( { uniqueId: generateUniqueId() } ); }, [] );
+	useEffect( () => { const expected = `nx-${ clientId.slice( 0, 8 ) }`; if ( uniqueId !== expected ) setAttributes( { uniqueId: expected } ); }, [ clientId ] );
 
 	const blockProps = useBlockProps( { 'data-nexus-id': uniqueId, id: cssId || undefined, style: { textAlign: alignment } } );
 

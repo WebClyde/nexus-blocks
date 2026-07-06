@@ -5,7 +5,7 @@
 	"version": "1.0.0",
 	"title": "Advanced Heading",
 	"category": "nexus-blocks",
-	"icon": "heading",
+	"icon": { "src": "heading", "foreground": "#7C3AED" },
 	"description": "Fully styled heading with gradient text, text stroke, SVG highlight shapes, and entrance animations.",
 	"keywords": ["heading", "title", "h1", "h2", "h3", "nexus"],
 	"textdomain": "nexus-blocks",

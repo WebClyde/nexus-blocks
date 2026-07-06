@@ -107,5 +107,5 @@
 		"nexusBlocks/activeTabId": "activeTabId"
 	},
 	"editorScript": "file:./index.js",
-	"icon": "index-card"
+	"icon": { "src": "index-card", "foreground": "#7C3AED" }
 }

@@ -192,5 +192,5 @@
 		}
 	},
 	"editorScript": "file:./index.js",
-	"icon": "welcome-widgets-menus"
+	"icon": { "src": "welcome-widgets-menus", "foreground": "#7C3AED" }
 }

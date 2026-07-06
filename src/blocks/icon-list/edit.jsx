@@ -5,7 +5,6 @@ import { __ } from '@wordpress/i18n';
 import { useEffect, useState } from '@wordpress/element';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl, RangeControl, ToggleControl, ButtonGroup, Button } from '@wordpress/components';
-import { generateUniqueId } from '../../hooks/useStyleOutput';
 import { TypographyControl, ColorControl, SpacingControl, AnimationControl, IconControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
@@ -17,9 +16,9 @@ import {
 } from '../../panels';
 const DEFAULT_ITEM = { iconClass: 'fa-solid fa-check', text: 'List item', link: '', iconColor: '' };
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const { uniqueId, items, layout, alignment, itemSpacing, showDivider, dividerStyle, dividerWeight, dividerColor, dividerGap, defaultIconColor, iconSize, iconBgColor, iconBorderRadius, iconPadding, iconTextGap, textColor, textHoverColor, typography, cssId, cssClasses, margin, padding, animation } = attributes;
-	useEffect( () => { if ( ! uniqueId ) setAttributes( { uniqueId: generateUniqueId() } ); }, [] );
+	useEffect( () => { const expected = `nx-${ clientId.slice( 0, 8 ) }`; if ( uniqueId !== expected ) setAttributes( { uniqueId: expected } ); }, [ clientId ] );
 	const blockProps = useBlockProps( { 'data-nexus-id': uniqueId, id: cssId || undefined } );
 	const listItems = items ?? [ DEFAULT_ITEM ];
 

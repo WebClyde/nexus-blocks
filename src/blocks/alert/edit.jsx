@@ -5,7 +5,6 @@ import { __ } from '@wordpress/i18n';
 import { useEffect, useState } from '@wordpress/element';
 import { InspectorControls, RichText, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl, RangeControl, ToggleControl } from '@wordpress/components';
-import { generateUniqueId } from '../../hooks/useStyleOutput';
 import { TypographyControl, ColorControl, BorderControl, BoxShadowControl, BackgroundControl, backgroundToStyle, backgroundHoverToCSS, SpacingControl, AnimationControl, IconControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
@@ -31,9 +30,9 @@ const TYPE_DEFAULTS = {
 	custom:  { bg: '#F9FAFB', text: '#111827', icon: 'fa-solid fa-info-circle', border: '#E5E7EB' },
 };
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const { uniqueId, alertType, title, description, iconClass, showIcon, dismissible, dismissCookie, cookieDuration, background, textColor, iconColor, iconSize, border, borderLeftAccent, borderLeftAccentColor, borderLeftAccentWidth, borderRadius, boxShadow, padding, titleTypography, descTypography, titleColorOverride, dismissBtnColor, cssId, cssClasses, margin, animation } = attributes;
-	useEffect( () => { if ( ! uniqueId ) setAttributes( { uniqueId: generateUniqueId() } ); }, [] );
+	useEffect( () => { const expected = `nx-${ clientId.slice( 0, 8 ) }`; if ( uniqueId !== expected ) setAttributes( { uniqueId: expected } ); }, [ clientId ] );
 	const [ dismissed, setDismissed ] = useState( false );
 	if ( dismissed ) return null;
 

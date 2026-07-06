@@ -5,7 +5,6 @@ import { __ } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, RangeControl, TextControl, ButtonGroup, Button } from '@wordpress/components';
-import { generateUniqueId } from '../../hooks/useStyleOutput';
 import { ColorControl, SpacingControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
@@ -23,9 +22,9 @@ const ELEMENTS = [
 	{ label: 'None', value: 'none' }, { label: 'Text', value: 'text' }, { label: 'Icon', value: 'icon' },
 ];
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const { uniqueId, dividerStyle, dividerWidth, alignment, element, elementText, elementIcon, dividerColor, dividerWeight, gapAbove, gapBelow, textColor, iconColor, iconSize, cssId, cssClasses } = attributes;
-	useEffect( () => { if ( ! uniqueId ) setAttributes( { uniqueId: generateUniqueId() } ); }, [] );
+	useEffect( () => { const expected = `nx-${ clientId.slice( 0, 8 ) }`; if ( uniqueId !== expected ) setAttributes( { uniqueId: expected } ); }, [ clientId ] );
 	const blockProps = useBlockProps( { 'data-nexus-id': uniqueId, id: cssId || undefined, style: { textAlign: alignment ?? 'center', paddingTop: gapAbove ? `${ gapAbove }px` : undefined, paddingBottom: gapBelow ? `${ gapBelow }px` : undefined } } );
 	const lineStyle = { borderTopStyle: dividerStyle ?? 'solid', borderTopWidth: `${ dividerWeight ?? 1 }px`, borderTopColor: dividerColor ?? '#E5E7EB', width: dividerWidth ?? '100%', display: 'inline-block', verticalAlign: 'middle' };
 	return (

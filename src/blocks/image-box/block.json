@@ -151,5 +151,5 @@
 		}
 	},
 	"editorScript": "file:./index.js",
-	"icon": "images-alt"
+	"icon": { "src": "images-alt", "foreground": "#7C3AED" }
 }

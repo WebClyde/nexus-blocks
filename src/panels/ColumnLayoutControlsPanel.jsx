@@ -73,12 +73,18 @@ const SVG = {
 
 /**
  * 🔲 Column Layout Controls Panel
+ *
+ * `flexOnly` hides the Display Mode picker and Grid controls entirely — the
+ * container is always flex. Used by row-layout, which is flex-only by design.
+ * `gridOnly` is the mirror image, used by grid-layout. section-box passes
+ * neither and keeps the full picker.
  */
-export default function ColumnLayoutControlsPanel( { flexLayout = {}, onChangeFlex, initialOpen = false, ...props } ) {
+export default function ColumnLayoutControlsPanel( { flexLayout = {}, onChangeFlex, initialOpen = false, flexOnly = false, gridOnly = false, ...props } ) {
 	const set = ( key, val ) => onChangeFlex( { ...flexLayout, [ key ]: val } );
 
-	const isFlex = flexLayout.display === 'flex' || flexLayout.display === 'inline-flex';
-	const isGrid = flexLayout.display === 'grid';
+	const lockedMode = flexOnly || gridOnly;
+	const isFlex = gridOnly ? false : ( flexOnly || flexLayout.display === 'flex' || flexLayout.display === 'inline-flex' );
+	const isGrid = flexOnly ? false : ( gridOnly || flexLayout.display === 'grid' );
 
 	return (
 		<PanelBody
@@ -87,17 +93,19 @@ export default function ColumnLayoutControlsPanel( { flexLayout = {}, onChangeFl
 			{ ...props }
 		>
 			{/* ── Display mode ── */}
-			<IconGroup
-				label={ __( 'Display Mode', 'nexus-blocks' ) }
-				value={ flexLayout.display || '' }
-				onChange={ ( v ) => set( 'display', v ) }
-				options={ [
-					{ value: '',            label: 'Block (Default)',  svg: SVG.block },
-					{ value: 'flex',        label: 'Flex',             svg: SVG.flex },
-					{ value: 'inline-flex', label: 'Inline Flex',      svg: SVG.inlineFlex },
-					{ value: 'grid',        label: 'CSS Grid',         svg: SVG.grid },
-				] }
-			/>
+			{ ! lockedMode && (
+				<IconGroup
+					label={ __( 'Display Mode', 'nexus-blocks' ) }
+					value={ flexLayout.display || '' }
+					onChange={ ( v ) => set( 'display', v ) }
+					options={ [
+						{ value: '',            label: 'Block (Default)',  svg: SVG.block },
+						{ value: 'flex',        label: 'Flex',             svg: SVG.flex },
+						{ value: 'inline-flex', label: 'Inline Flex',      svg: SVG.inlineFlex },
+						{ value: 'grid',        label: 'CSS Grid',         svg: SVG.grid },
+					] }
+				/>
+			) }
 
 			{/* ── Flex controls ── */}
 			{ isFlex && (

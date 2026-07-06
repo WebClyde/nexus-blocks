@@ -96,5 +96,5 @@
 		}
 	},
 	"editorScript": "file:./index.js",
-	"icon": "minus"
+	"icon": { "src": "minus", "foreground": "#7C3AED" }
 }

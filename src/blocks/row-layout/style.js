@@ -7,9 +7,10 @@ export function buildRowLayoutRules( attributes ) {
 		borderColor, borderWidth, borderStyle, borderRadius, boxShadow
 	} = attributes;
 
-	const isFlex = !flexLayout?.display || flexLayout.display === 'flex' || flexLayout.display === 'inline-flex';
-	const isGrid = flexLayout?.display === 'grid';
-
+	// Row Layout is flex-only by design — the rules below never branch on
+	// flexLayout.display, so stale/legacy `display: 'grid'` values (from
+	// before this restriction existed) can no longer render as grid even
+	// though the UI no longer offers a way to select it.
 	const isColumn = flexLayout?.flexDirection === 'column' || flexLayout?.flexDirection === 'column-reverse';
 
 	return {
@@ -41,27 +42,20 @@ export function buildRowLayoutRules( attributes ) {
 			'height': '100%',
 			'min-height': 'inherit',
 			
-			// Layout — defaults to flex/row/wrap
-			'display':         flexLayout?.display || 'flex',
-			'flex-direction':  isFlex ? ( flexLayout?.flexDirection  || 'row'  ) : undefined,
-			'flex-wrap':       isFlex ? ( flexLayout?.flexWrap       || 'wrap' ) : undefined,
-			'justify-content': isFlex ? ( flexLayout?.justifyContent || undefined ) : undefined,
-			'align-items':     ( isFlex || isGrid ) ? ( flexLayout?.alignItems || undefined ) : undefined,
-			'column-gap':      ( isFlex || isGrid ) ? ( columnGap  || '20px' ) : undefined,
-			'row-gap':         ( isFlex || isGrid ) ? ( rowGap     || '20px' ) : undefined,
-
-			// Grid
-			'grid-template-columns': isGrid
-				? ( flexLayout?.gridTemplateColumns || ( flexLayout?.columns ? `repeat(${ flexLayout.columns }, 1fr)` : 'repeat(2, 1fr)' ) )
-				: undefined,
-			'grid-template-rows': isGrid && flexLayout?.gridTemplateRows ? flexLayout.gridTemplateRows : undefined,
-			'justify-items': isGrid && flexLayout?.justifyItems ? flexLayout.justifyItems : undefined,
+			// Layout — always flex, regardless of any stored display value
+			'display':         'flex',
+			'flex-direction':  flexLayout?.flexDirection  || 'row',
+			'flex-wrap':       flexLayout?.flexWrap       || 'wrap',
+			'justify-content': flexLayout?.justifyContent || undefined,
+			'align-items':     flexLayout?.alignItems     || undefined,
+			'column-gap':      columnGap || '20px',
+			'row-gap':         rowGap    || '20px',
 		},
 
 		// By default each direct child gets equal flex sizing only in row direction
 		' > .nx-row-inner > *': {
-			'flex':          isFlex && !isGrid && !isColumn ? '1 1 0' : undefined,
-			'min-width':     isFlex && !isGrid && !isColumn ? '0' : undefined,
+			'flex':          ! isColumn ? '1 1 0' : undefined,
+			'min-width':     ! isColumn ? '0' : undefined,
 			'width':         isColumn ? '100%' : undefined,
 			'box-sizing':    'border-box',
 		},

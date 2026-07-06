@@ -116,5 +116,8 @@
     }
   },
   "editorScript": "file:./index.js",
-  "icon": "star-filled"
+  "icon": {
+    "src": "star-filled",
+    "foreground": "#7C3AED"
+  }
 }

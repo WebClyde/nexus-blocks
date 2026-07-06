@@ -3,11 +3,14 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
-import { InspectorControls, useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
+import { InspectorControls, InnerBlocks, useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 import { TextControl } from '@wordpress/components';
+import { useSelect, useDispatch } from '@wordpress/data';
+import { createBlock } from '@wordpress/blocks';
 import { useStyleOutput } from '../../hooks/useStyleOutput';
 import { buildRowLayoutRules } from './style';
 import { BackgroundControl, SpacingControl, AnimationControl, BorderControl } from '../../controls';
+import ColumnCountPicker from '../../components/ColumnCountPicker';
 import {
 	SizeAndSpacingPanel,
 	ColorsAndBackgroundsPanel,
@@ -16,10 +19,17 @@ import {
 	DataAndSchemaPanel,
 } from '../../panels';
 
-// Editor preview: placeholder for the row
-const TEMPLATE = [ [ 'core/paragraph', { placeholder: 'Add blocks inside this row…' } ] ];
+// Even-split widths for the column-count picker (1–6 columns).
+const COLUMN_WIDTHS = {
+	1: '100%',
+	2: '50%',
+	3: '33.33%',
+	4: '25%',
+	5: '20%',
+	6: '16.66%',
+};
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
 		uniqueId, flexLayout, columnGap, rowGap, margin, padding, width, maxWidth, minHeight,
 		background,
@@ -28,10 +38,9 @@ export default function Edit( { attributes, setAttributes } ) {
 	} = attributes;
 
 	useEffect( () => {
-		if ( ! uniqueId ) {
-			setAttributes( { uniqueId: 'nx-' + Math.random().toString( 36 ).substring( 2, 8 ) } );
-		}
-	}, [] );
+		const expected = `nx-${ clientId.slice( 0, 8 ) }`;
+		if ( uniqueId !== expected ) setAttributes( { uniqueId: expected } );
+	}, [ clientId ] );
 
 	const blockProps = useBlockProps( {
 		'data-nexus-id': uniqueId,
@@ -46,20 +55,38 @@ export default function Edit( { attributes, setAttributes } ) {
 	} );
 	const scopedCss = useStyleOutput( uniqueId, buildRowLayoutRules, attributes );
 
+	const hasColumns = useSelect(
+		( select ) => select( 'core/block-editor' ).getBlockOrder( clientId ).length > 0,
+		[ clientId ]
+	);
+	const { replaceInnerBlocks } = useDispatch( 'core/block-editor' );
+
 	const innerBlocksProps = useInnerBlocksProps(
 		{ className: 'nx-row-inner' },
-		{ template: TEMPLATE }
+		{
+			allowedBlocks: [ 'nexus-blocks/row-column' ],
+			renderAppender: () => <InnerBlocks.ButtonBlockAppender />,
+		}
 	);
+
+	const insertColumns = ( count ) => {
+		const widthPct = COLUMN_WIDTHS[ count ] ?? `${ ( 100 / count ).toFixed( 2 ) }%`;
+		const columns = Array.from( { length: count }, () =>
+			createBlock( 'nexus-blocks/row-column', { width: { desktop: widthPct } } )
+		);
+		replaceInnerBlocks( clientId, columns, false );
+	};
 
 	return (
 		<>
 			<InspectorControls>
 				<ColumnLayoutControlsPanel
 					initialOpen={ true }
+					flexOnly
 					flexLayout={ flexLayout || {} }
 					onChangeFlex={ ( v ) => setAttributes( { flexLayout: v } ) }
 				/>
-				
+
 				<ColorsAndBackgroundsPanel initialOpen={ false }>
 					<BackgroundControl value={ background } onChange={ ( v ) => setAttributes( { background: v } ) } />
 				</ColorsAndBackgroundsPanel>
@@ -94,7 +121,17 @@ export default function Edit( { attributes, setAttributes } ) {
 
 			<div { ...blockProps }>
 				{ scopedCss && <style>{ scopedCss }</style> }
-				<div { ...innerBlocksProps } />
+				{ hasColumns
+					? <div { ...innerBlocksProps } />
+					: (
+						<ColumnCountPicker
+							icon="columns"
+							label={ __( 'Row Layout', 'nexus-blocks' ) }
+							instructions={ __( 'Choose how many columns to start with. You can add, remove, or resize them afterwards.', 'nexus-blocks' ) }
+							onPick={ insertColumns }
+						/>
+					)
+				}
 			</div>
 		</>
 	);

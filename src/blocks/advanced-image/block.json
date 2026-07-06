@@ -139,5 +139,5 @@
 		}
 	},
 	"editorScript": "file:./index.js",
-	"icon": "format-image"
+	"icon": { "src": "format-image", "foreground": "#7C3AED" }
 }

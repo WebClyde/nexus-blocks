@@ -132,5 +132,5 @@
 		}
 	},
 	"editorScript": "file:./index.js",
-	"icon": "warning"
+	"icon": { "src": "warning", "foreground": "#7C3AED" }
 }

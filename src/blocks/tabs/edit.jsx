@@ -6,7 +6,6 @@ import { useEffect } from '@wordpress/element';
 import { InspectorControls, InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { TextControl, SelectControl, RangeControl } from '@wordpress/components';
-import { generateUniqueId } from '../../hooks/useStyleOutput';
 import { TypographyControl, ColorControl, BackgroundControl, backgroundToStyle, backgroundHoverToCSS, BorderControl, SpacingControl, AnimationControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
@@ -25,7 +24,7 @@ const TAB_LAYOUTS = [
 export default function Edit( { attributes, setAttributes, clientId } ) {
 	const { uniqueId, activeTabId, defaultOpen, tabLayout, tabActivation, labelBgActive, labelTextActive, labelTypography, activeIndicator, indicatorColor, tabBorder, tabPadding, tabSpacing, contentBackground, contentBorder, contentPadding, margin, cssId, cssClasses, animation } = attributes;
 	
-	useEffect( () => { if ( ! uniqueId ) setAttributes( { uniqueId: generateUniqueId() } ); }, [] );
+	useEffect( () => { const expected = `nx-${ clientId.slice( 0, 8 ) }`; if ( uniqueId !== expected ) setAttributes( { uniqueId: expected } ); }, [ clientId ] );
 	
 	const blockProps = useBlockProps( { 'data-nexus-id': uniqueId, id: cssId || undefined } );
 	const contentHoverCss = backgroundHoverToCSS( uniqueId, contentBackground, ' .nx-tab-panels' );

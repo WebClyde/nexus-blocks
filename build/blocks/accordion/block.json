@@ -169,5 +169,8 @@
     }
   },
   "editorScript": "file:./index.js",
-  "icon": "list-view"
+  "icon": {
+    "src": "list-view",
+    "foreground": "#7C3AED"
+  }
 }

@@ -15,5 +15,6 @@
 		"label":      { "type": "string", "default": "New Tab" },
 		"iconClass":  { "type": "string", "default": "" }
 	},
-	"editorScript": "file:./index.js"
+	"editorScript": "file:./index.js",
+	"icon": { "src": "admin-page", "foreground": "#7C3AED" }
 }

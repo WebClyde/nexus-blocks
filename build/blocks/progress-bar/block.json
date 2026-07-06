@@ -142,5 +142,8 @@
     }
   },
   "editorScript": "file:./index.js",
-  "icon": "chart-bar"
+  "icon": {
+    "src": "chart-bar",
+    "foreground": "#7C3AED"
+  }
 }

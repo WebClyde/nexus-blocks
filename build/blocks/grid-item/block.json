@@ -1,0 +1,80 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "nexus-blocks/grid-item",
+  "version": "1.0.0",
+  "title": "Grid Item",
+  "category": "nexus-blocks",
+  "parent": [
+    "nexus-blocks/grid-layout"
+  ],
+  "description": "A single cell inside a Grid Layout, with its own span, placement, padding, and background.",
+  "keywords": [
+    "grid",
+    "item",
+    "cell",
+    "nexus"
+  ],
+  "textdomain": "nexus-blocks",
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "customClassName": true,
+    "reusable": false
+  },
+  "attributes": {
+    "uniqueId": {
+      "type": "string",
+      "default": ""
+    },
+    "colSpan": {
+      "type": "number",
+      "default": 0
+    },
+    "gridColumn": {
+      "type": "string",
+      "default": ""
+    },
+    "rowSpan": {
+      "type": "string",
+      "default": ""
+    },
+    "gridRow": {
+      "type": "string",
+      "default": ""
+    },
+    "gridArea": {
+      "type": "string",
+      "default": ""
+    },
+    "justifySelf": {
+      "type": "string",
+      "default": ""
+    },
+    "alignSelf": {
+      "type": "string",
+      "default": ""
+    },
+    "padding": {
+      "type": "object",
+      "default": {}
+    },
+    "background": {
+      "type": "object",
+      "default": {}
+    },
+    "cssId": {
+      "type": "string",
+      "default": ""
+    },
+    "cssClasses": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "icon": {
+    "src": "excerpt-view",
+    "foreground": "#7C3AED"
+  }
+}

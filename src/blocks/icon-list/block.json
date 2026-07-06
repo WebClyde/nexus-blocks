@@ -123,5 +123,5 @@
 		}
 	},
 	"editorScript": "file:./index.js",
-	"icon": "editor-ul"
+	"icon": { "src": "editor-ul", "foreground": "#7C3AED" }
 }

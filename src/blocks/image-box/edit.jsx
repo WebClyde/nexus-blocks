@@ -5,7 +5,6 @@ import { __ } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
 import { InspectorControls, MediaUpload, MediaUploadCheck, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl, RangeControl, Button } from '@wordpress/components';
-import { generateUniqueId } from '../../hooks/useStyleOutput';
 import { TypographyControl, ColorControl, BorderControl, BoxShadowControl, SpacingControl, AnimationControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
@@ -21,9 +20,9 @@ const OBJECT_FITS = [ { label: 'Cover', value: 'cover' }, { label: 'Contain', va
 const IMG_HOVER_ANIMS = [ { label: 'None', value: '' }, { label: 'Grow', value: 'grow' }, { label: 'Shrink', value: 'shrink' }, { label: 'Float', value: 'float' }, { label: 'Sink', value: 'sink' } ];
 const CARD_HOVER = [ { label: 'None', value: '' }, { label: 'Lift', value: 'lift' }, { label: 'Border Glow', value: 'glow' }, { label: 'Underline Slide', value: 'underline-slide' } ];
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const { uniqueId, imageId, imageUrl, imageAlt, title, titleTag, description, linkUrl, linkType, buttonText, position, imageWidth, imageMaxWidth, imageHeight, objectFit, imageSpacing, imageBorder, imageBorderRadius, imageBoxShadow, imgHoverAnimation, alignment, hoverEffect, transitionDuration, titleColor, titleTypography, titleSpacing, descColor, descTypography, cssId, cssClasses, margin, animation } = attributes;
-	useEffect( () => { if ( ! uniqueId ) setAttributes( { uniqueId: generateUniqueId() } ); }, [] );
+	useEffect( () => { const expected = `nx-${ clientId.slice( 0, 8 ) }`; if ( uniqueId !== expected ) setAttributes( { uniqueId: expected } ); }, [ clientId ] );
 	const Tag = titleTag || 'h3';
 	const blockProps = useBlockProps( { 'data-nexus-id': uniqueId, id: cssId || undefined } );
 	return (

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "nexus-blocks/row-column",
+  "version": "1.0.0",
+  "title": "Row Column",
+  "category": "nexus-blocks",
+  "parent": [
+    "nexus-blocks/row-layout"
+  ],
+  "description": "A single column inside a Row Layout, with its own width, padding, background, and vertical alignment.",
+  "keywords": [
+    "column",
+    "row",
+    "nexus"
+  ],
+  "textdomain": "nexus-blocks",
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "customClassName": true,
+    "reusable": false
+  },
+  "attributes": {
+    "uniqueId": {
+      "type": "string",
+      "default": ""
+    },
+    "width": {
+      "type": "object",
+      "default": {}
+    },
+    "verticalAlign": {
+      "type": "string",
+      "default": ""
+    },
+    "padding": {
+      "type": "object",
+      "default": {}
+    },
+    "background": {
+      "type": "object",
+      "default": {}
+    },
+    "cssId": {
+      "type": "string",
+      "default": ""
+    },
+    "cssClasses": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "icon": {
+    "src": "table-col-after",
+    "foreground": "#7C3AED"
+  }
+}

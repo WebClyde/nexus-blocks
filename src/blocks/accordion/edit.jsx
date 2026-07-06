@@ -22,13 +22,12 @@ const DEFAULT_ITEMS = [
 	{ title: 'Is it free?', content: 'Phase 1 blocks are free. Pro blocks are available in Nexus Blocks Pro.' },
 ];
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const { uniqueId, items, defaultOpen, openIconClass, closeIconClass, iconPosition, faqSchema, headerBgActive, titleColor, titleColorActive, titleTypography, contentTypography, headerBorder, headerBorderBetween, headerPadding, iconColor, iconColorActive, iconSize, iconBgActive, iconBorderRadius, contentBackground, contentPadding, contentBorder, margin, padding, itemGap, titleContentGap, cssId, cssClasses, animation, width, maxWidth, minHeight, overflow } = attributes;
 	useEffect( () => {
-		if ( ! uniqueId ) {
-			setAttributes( { uniqueId: 'nx-' + Math.random().toString( 36 ).substring( 2, 8 ) } );
-		}
-	}, [] );
+		const expected = `nx-${ clientId.slice( 0, 8 ) }`;
+		if ( uniqueId !== expected ) setAttributes( { uniqueId: expected } );
+	}, [ clientId ] );
 	const [ openIdx, setOpenIdx ] = useState( defaultOpen ?? -1 );
 	const blockProps = useBlockProps( { 'data-nexus-id': uniqueId, id: cssId || undefined } );
 	const scopedCss = useStyleOutput( uniqueId, buildAccordionRules, attributes );

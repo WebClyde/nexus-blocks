@@ -152,5 +152,5 @@
 		}
 	},
 	"editorScript": "file:./index.js",
-	"icon": "performance"
+	"icon": { "src": "performance", "foreground": "#7C3AED" }
 }

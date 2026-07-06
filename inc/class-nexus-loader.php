@@ -32,6 +32,9 @@ class Nexus_Loader {
 		'alert',
 		'section-box',
 		'row-layout',
+		'row-column',
+		'grid-layout',
+		'grid-item',
 	];
 
 	public static function instance(): self {

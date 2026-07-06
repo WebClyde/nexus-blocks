@@ -5,7 +5,6 @@ import { __ } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl, ToggleControl, RangeControl, ButtonGroup, Button } from '@wordpress/components';
-import { generateUniqueId } from '../../hooks/useStyleOutput';
 import { TypographyControl, ColorControl, BorderControl, BoxShadowControl, BackgroundControl, backgroundToStyle, backgroundHoverToCSS, SpacingControl, AnimationControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
@@ -25,7 +24,7 @@ const BTN_HOVER_ANIMS = [
 ];
 const SIZE_PADDING = { xs: '6px 12px', sm: '8px 16px', md: '12px 24px', lg: '16px 32px', xl: '20px 40px' };
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
 		uniqueId, text, linkUrl, linkTarget, linkNofollow, buttonSize, alignment,
 		textColor, background, typography,
@@ -35,7 +34,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		margin, padding, cssId, cssClasses, animation,
 	} = attributes;
 
-	useEffect( () => { if ( ! uniqueId ) setAttributes( { uniqueId: generateUniqueId() } ); }, [] );
+	useEffect( () => { const expected = `nx-${ clientId.slice( 0, 8 ) }`; if ( uniqueId !== expected ) setAttributes( { uniqueId: expected } ); }, [ clientId ] );
 
 	const btnSize  = buttonSize ?? 'md';
 	const blockProps = useBlockProps( { 'data-nexus-id': uniqueId, id: cssId || undefined, style: { textAlign: alignment ?? 'left' } } );

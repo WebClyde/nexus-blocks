@@ -120,5 +120,5 @@
 		}
 	},
 	"editorScript": "file:./index.js",
-	"icon": "button"
+	"icon": { "src": "button", "foreground": "#7C3AED" }
 }

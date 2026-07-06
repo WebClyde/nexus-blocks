@@ -5,7 +5,6 @@ import { __ } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl, RangeControl, ToggleControl, ButtonGroup, Button } from '@wordpress/components';
-import { generateUniqueId } from '../../hooks/useStyleOutput';
 import { ColorControl, BackgroundControl, backgroundToStyle, backgroundHoverToCSS, BorderControl, BoxShadowControl, SpacingControl, AnimationControl, IconControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
@@ -31,7 +30,7 @@ const HOVER_ANIMS = [
 	{ label: 'Rotate', value: 'rotate' }, { label: 'Wobble', value: 'wobble' }, { label: 'Float', value: 'float' },
 ];
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
 		uniqueId, iconClass, iconView, iconShape, linkUrl, linkTarget, alignment,
 		tooltipText, tooltipPosition,
@@ -40,7 +39,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		margin, cssId, cssClasses, animation,
 	} = attributes;
 
-	useEffect( () => { if ( ! uniqueId ) setAttributes( { uniqueId: generateUniqueId() } ); }, [] );
+	useEffect( () => { const expected = `nx-${ clientId.slice( 0, 8 ) }`; if ( uniqueId !== expected ) setAttributes( { uniqueId: expected } ); }, [ clientId ] );
 
 	const blockProps = useBlockProps( { 'data-nexus-id': uniqueId, id: cssId || undefined, style: { textAlign: alignment ?? 'center' } } );
 

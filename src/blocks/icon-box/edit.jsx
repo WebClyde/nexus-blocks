@@ -5,7 +5,6 @@ import { __ } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl, ToggleControl, RangeControl, ButtonGroup, Button } from '@wordpress/components';
-import { generateUniqueId } from '../../hooks/useStyleOutput';
 import { TypographyControl, ColorControl, BorderControl, BoxShadowControl, BackgroundControl, backgroundToStyle, backgroundHoverToCSS, SpacingControl, AnimationControl, IconControl } from '../../controls';
 import {
 	SizeAndSpacingPanel,
@@ -20,7 +19,7 @@ const ICON_ANIMS  = [ { label: 'None', value: '' }, { label: 'Spin', value: 'spi
 const HOVER_EFFECTS = [ { label: 'None', value: '' }, { label: 'Lift', value: 'lift' }, { label: 'Card Flip', value: 'flip' }, { label: 'Border Glow', value: 'glow' }, { label: 'Underline Slide', value: 'underline-slide' } ];
 const POSITIONS = [ { label: 'Icon Top', value: 'top' }, { label: 'Icon Left', value: 'left' }, { label: 'Icon Right', value: 'right' } ];
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
 		uniqueId, iconClass, iconView, iconShape, title, titleTag, description, linkUrl, linkType, buttonText, badgeText, position, numberPrefix,
 		iconPrimaryColor, iconSecondaryColor, iconSize, iconPadding, iconSpacing,
@@ -30,7 +29,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		margin, cssId, cssClasses, animation,
 	} = attributes;
 
-	useEffect( () => { if ( ! uniqueId ) setAttributes( { uniqueId: generateUniqueId() } ); }, [] );
+	useEffect( () => { const expected = `nx-${ clientId.slice( 0, 8 ) }`; if ( uniqueId !== expected ) setAttributes( { uniqueId: expected } ); }, [ clientId ] );
 
 	const Tag = titleTag || 'h3';
 	const blockProps = useBlockProps( { 'data-nexus-id': uniqueId, id: cssId || undefined } );

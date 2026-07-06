@@ -5,7 +5,6 @@ import { __ } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, TextControl } from '@wordpress/components';
-import { generateUniqueId } from '../../hooks/useStyleOutput';
 import { BackgroundControl, backgroundToStyle, backgroundHoverToCSS } from '../../controls';
 import {
 	SizeAndSpacingPanel,
@@ -13,9 +12,9 @@ import {
 	DataAndSchemaPanel
 } from '../../panels';
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const { uniqueId, height, background, cssId, cssClasses } = attributes;
-	useEffect( () => { if ( ! uniqueId ) setAttributes( { uniqueId: generateUniqueId() } ); }, [] );
+	useEffect( () => { const expected = `nx-${ clientId.slice( 0, 8 ) }`; if ( uniqueId !== expected ) setAttributes( { uniqueId: expected } ); }, [ clientId ] );
 	const blockProps = useBlockProps( {
 		'data-nexus-id': uniqueId,
 		id: cssId || undefined,

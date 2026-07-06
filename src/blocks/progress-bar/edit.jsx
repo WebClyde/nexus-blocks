@@ -19,7 +19,7 @@ import {
 
 const DEFAULT_ITEM = { title: 'Skill', percentage: 75, color: '' };
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
 		uniqueId, items, displayPercentage, percentagePosition,
 		layoutType, continuousAnimation, counterAnimation, circleSize, circleStrokeWidth,
@@ -29,10 +29,9 @@ export default function Edit( { attributes, setAttributes } ) {
 	} = attributes;
 
 	useEffect( () => {
-		if ( ! uniqueId ) {
-			setAttributes( { uniqueId: 'nx-' + Math.random().toString( 36 ).substring( 2, 8 ) } );
-		}
-	}, [] );
+		const expected = `nx-${ clientId.slice( 0, 8 ) }`;
+		if ( uniqueId !== expected ) setAttributes( { uniqueId: expected } );
+	}, [ clientId ] );
 
 	const blockProps = useBlockProps( { 'data-nexus-id': uniqueId, id: cssId || undefined } );
 	const scopedCss = useStyleOutput( uniqueId, buildProgressBarRules, attributes );

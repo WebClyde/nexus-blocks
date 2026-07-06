@@ -52,5 +52,8 @@
     }
   },
   "editorScript": "file:./index.js",
-  "icon": "resize-vertical"
+  "icon": {
+    "src": "resize-vertical",
+    "foreground": "#7C3AED"
+  }
 }

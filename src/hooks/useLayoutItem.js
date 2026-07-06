@@ -52,10 +52,15 @@ const withLayoutItemControls = createHigherOrderComponent( ( BlockEdit ) => {
 		const parentDisplay = parentBlock?.attributes?.flexLayout?.display;
 		let isFlex = false;
 		let isGrid = false;
-		
+
 		if ( parentBlock?.name === 'nexus-blocks/row-layout' ) {
-			isFlex = !parentDisplay || parentDisplay === 'flex' || parentDisplay === 'inline-flex';
-			isGrid = parentDisplay === 'grid';
+			// Row Layout is flex-only by design, regardless of any stored
+			// display value (see row-layout/style.js for the same rule).
+			isFlex = true;
+		} else if ( parentBlock?.name === 'nexus-blocks/grid-layout' ) {
+			// Grid Layout is grid-only by design. Its layout config lives
+			// under the `gridLayout` attribute, not `flexLayout`.
+			isGrid = true;
 		} else if ( parentBlock?.name === 'nexus-blocks/section-box' ) {
 			isFlex = parentDisplay === 'flex' || parentDisplay === 'inline-flex';
 			isGrid = parentDisplay === 'grid';
@@ -67,8 +72,12 @@ const withLayoutItemControls = createHigherOrderComponent( ( BlockEdit ) => {
 			isGrid = parentDisplay === 'grid';
 		}
 
-		// Only show controls if the block has our attribute AND is inside a flex/grid container
-		if ( ! isSelected || ! attributes.hasOwnProperty( 'nexusLayoutItem' ) || ( ! isFlex && ! isGrid ) ) {
+		// Only relevant if the block has our attribute AND is inside a flex/grid container.
+		// (Selection state must NOT gate this — the CSS below has to stay live even
+		// when the block is deselected, so the editor preview matches the frontend.)
+		const applies = attributes.hasOwnProperty( 'nexusLayoutItem' ) && ( isFlex || isGrid );
+
+		if ( ! applies ) {
 			return <BlockEdit { ...props } />;
 		}
 
@@ -76,7 +85,8 @@ const withLayoutItemControls = createHigherOrderComponent( ( BlockEdit ) => {
 			nexusLayoutItem: { ...nexusLayoutItem, [ key ]: val }
 		} );
 
-		// Generate inline CSS for the editor wrapper
+		// Generate inline CSS for the editor wrapper — independent of isSelected,
+		// so the layout doesn't revert the moment focus leaves this block.
 		let cssString = '';
 		if ( Object.keys( nexusLayoutItem || {} ).length > 0 ) {
 			const styles = buildLayoutStyles( nexusLayoutItem );
@@ -93,8 +103,9 @@ const withLayoutItemControls = createHigherOrderComponent( ( BlockEdit ) => {
 			<>
 				<BlockEdit { ...props } />
 				{ cssString && <style>{ cssString }</style> }
-				<InspectorControls>
-					<PanelBody title={ __( '🔲 Flex & Grid Item', 'nexus-blocks' ) } initialOpen={ false }>
+				{ isSelected && (
+					<InspectorControls>
+						<PanelBody title={ __( '🔲 Flex & Grid Item', 'nexus-blocks' ) } initialOpen={ false }>
 						
 						{/* Grid-specific Controls */}
 						{ isGrid && (
@@ -183,6 +194,7 @@ const withLayoutItemControls = createHigherOrderComponent( ( BlockEdit ) => {
 						/>
 					</PanelBody>
 				</InspectorControls>
+				) }
 			</>
 		);
 	};

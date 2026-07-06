@@ -92,5 +92,8 @@
     }
   },
   "editorScript": "file:./index.js",
-  "icon": "editor-textcolor"
+  "icon": {
+    "src": "editor-textcolor",
+    "foreground": "#7C3AED"
+  }
 }

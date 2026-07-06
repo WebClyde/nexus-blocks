@@ -3,7 +3,7 @@
  * Plugin Name:       Nexus Blocks
  * Plugin URI:        https://nexusblocks.io
  * Description:       Advanced Gutenberg blocks with Elementor Pro-level controls. Zero bloat, scoped CSS, full design token system.
- * Version:           1.0.18
+ * Version:           1.0.0
  * Requires at least: 6.4
  * Requires PHP:      8.1
  * Author:            WebClyde
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'NEXUS_BLOCKS_VERSION', '1.0.18' );
+define( 'NEXUS_BLOCKS_VERSION', '1.0.0' );
 define( 'NEXUS_BLOCKS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'NEXUS_BLOCKS_URL', plugin_dir_url( __FILE__ ) );
 define( 'NEXUS_BLOCKS_FILE', __FILE__ );

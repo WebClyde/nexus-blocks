@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "nexus-blocks/grid-layout",
+	"version": "1.0.0",
+	"title": "Grid Layout",
+	"category": "nexus-blocks",
+	"description": "A CSS Grid container for building multi-column, multi-row grid layouts.",
+	"keywords": ["grid", "container", "columns", "layout", "nexus"],
+	"textdomain": "nexus-blocks",
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"customClassName": true
+	},
+	"attributes": {
+		"uniqueId":       { "type": "string",  "default": "" },
+		"gridLayout":     { "type": "object",  "default": { "display": "grid", "columns": 2 } },
+		"columnGap":      { "type": "string",  "default": "20px" },
+		"rowGap":         { "type": "string",  "default": "20px" },
+		"margin":         { "type": "object",  "default": {} },
+		"padding":        { "type": "object",  "default": {} },
+		"width":          { "type": "string",  "default": "" },
+		"maxWidth":       { "type": "string",  "default": "1200px" },
+		"minHeight":      { "type": "string",  "default": "" },
+		"background":     { "type": "object",  "default": {} },
+		"borderColor":    { "type": "string",  "default": "" },
+		"borderWidth":    { "type": "string",  "default": "" },
+		"borderStyle":    { "type": "string",  "default": "solid" },
+		"borderRadius":   { "type": "string",  "default": "" },
+		"boxShadow":      { "type": "string",  "default": "" },
+		"animation":      { "type": "object",  "default": {} },
+		"cssId":          { "type": "string",  "default": "" },
+		"cssClasses":     { "type": "string",  "default": "" }
+	},
+	"editorScript": "file:./index.js",
+	"icon": { "src": "grid-view", "foreground": "#7C3AED" }
+}

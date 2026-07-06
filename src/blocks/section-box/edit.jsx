@@ -26,7 +26,7 @@ const HTML_TAGS = [
 	{ label: '<main>',     value: 'main'     },
 ];
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
 		uniqueId, htmlTag, flexLayout, margin, padding, width, maxWidth, minHeight, overflow,
 		background,
@@ -35,10 +35,9 @@ export default function Edit( { attributes, setAttributes } ) {
 	} = attributes;
 
 	useEffect( () => {
-		if ( ! uniqueId ) {
-			setAttributes( { uniqueId: 'nx-' + Math.random().toString( 36 ).substring( 2, 8 ) } );
-		}
-	}, [] );
+		const expected = `nx-${ clientId.slice( 0, 8 ) }`;
+		if ( uniqueId !== expected ) setAttributes( { uniqueId: expected } );
+	}, [ clientId ] );
 
 	const blockProps = useBlockProps( { 
 		'data-nexus-id': uniqueId, 
